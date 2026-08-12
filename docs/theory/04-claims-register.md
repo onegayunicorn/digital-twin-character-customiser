@@ -91,6 +91,23 @@ presented as established fact in any external material.**
 | U2 | Universal Driver | Twin-engine architecture (event bus, state store, interpolation, heartbeat) | VERIFIED concept | `packages/digital-twin` (tested) |
 | U3 | Universal Driver | ghp_ PAT pasted in prior chat | SECURITY ACTION | User must revoke at github.com/settings/tokens; use fine-grained tokens |
 
+## G. Healthcare claims (2026-08-12 batch 4)
+
+| # | Source doc | Claim | Status | Disposition |
+|---|---|---|---|---|
+| H1 | DMD Mutation Repair | "100% cure efficacy for all DMD mutation classes / all 79 exons" | UNVERIFIED-CLAIM | Quarantined from all external materials; in-silico ≠ clinical efficacy |
+| H2 | DMD Mutation Repair | DMD nonsense mutation reference table (24 rows; UMD-TREAT-NMD/ClinVar-style, 726 nonsense total, ~50% of point mutations, ~25% exon-skipping hotspots) | VERIFIED reference data | Cited; incorporated into `packages/medgen` |
+| H3 | DMD Mutation Repair | Stop-codon classification + repair-mechanism simulation | SIMULATED | `packages/medgen` (clinical_claim_level=none) |
+| H4 | DMD Mutation Repair | "Shadow code" stealth/heritable edits (99.5% undetected) | EXCLUDED | Not built — ethics/regulatory red line |
+| H5 | DMD Mutation Repair | Nanobot dispersal 95% coverage; petal/biodegradable carriers | UNVERIFIED-CLAIM | Hypothetical; not procured |
+| H6 | DMD Mutation Repair | 6-month sprint to commercial beta; $1M secured; $2M ARR; FDA 510(k) in 6 weeks; IND in Month 4 | UNVERIFIED-CLAIM | Timeline/funding assertions unverified |
+| C1 | Cancer Killer | NIH SBIR section structure / VC deck structure (process doc) | VERIFIED | Templates adopted in medtech-gtm.md |
+| G1 | Genesis Engine | GA optimizer converges to analytic optima (sphere/rastrigin) | VERIFIED | `packages/genesis` tests |
+| G2 | Genesis Engine | "Self-evolving cure finder" | UNVERIFIED-CLAIM | Relabeled generic optimizer; no medical claims |
+| G3 | Genesis Engine | "Quantum-inspired SPSA" boost | SIMULATED | Coordinate-search surrogate, not quantum hardware |
+| G4 | Genesis Engine | "No ethical limits" framing | EXCLUDED | Guardrail policy applies |
+| N5 | DMD/BCI | BCI + CRISPR + nanobots integrated system | UNVERIFIED-CLAIM | Architecture concept only |
+
 ## D. Process rules
 
 1. New claims enter this register before any external publication.

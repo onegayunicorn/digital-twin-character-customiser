@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "medagents"
+version = "0.1.0"
+description = "Healthcare agency agents (hospital/doctor/researcher) — decision-support only, never autonomous treatment"
+requires-python = ">=3.10"
+dependencies = ["sovereign-orchestrator>=0.1"]
+
+[tool.setuptools.packages.find]
+include = ["medagents*"]

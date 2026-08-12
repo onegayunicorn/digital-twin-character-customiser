@@ -1,0 +1,1 @@
+medgen repair ok: exon 44 -> ['exon_skipping', 'prime_editing']

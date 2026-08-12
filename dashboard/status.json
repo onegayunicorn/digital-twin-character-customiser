@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-12T18:56:28.427155",
+  "generated_at": "2026-08-12T19:33:07.523673",
   "platform": {
     "spec": {
       "protocols": 131,
@@ -28,12 +28,17 @@
     }
   },
   "packages": [
+    "bridge",
     "cpf-sim",
     "digital-twin",
     "earth-sim",
+    "genesis",
     "ipai-cli",
+    "medagents",
+    "medgen",
     "pero",
     "sensor",
+    "sonar-5d",
     "sovereign",
     "theory-sim"
   ],

@@ -62,6 +62,36 @@ EXTENSIONS = [
      "SphereStateChangedTrigger",
      "RenderSphereTask | ComputeEnergyTask",
      "Sync -> Compute -> Render -> Observe"),
+    (138, "Medical Decision Support",
+     "Healthcare agency agents (hospital triage, doctor case review, researcher matching) — decision-support only, never autonomous treatment; every output carries clinical_claim_level=none.",
+     "VitalsReceivedTrigger | CaseSubmittedTrigger",
+     "RunTriageTask | ReviewCaseTask | MatchLiteratureTask",
+     "Ingest -> Score -> Present -> Log -> Escalate"),
+    (139, "DMD Repair Simulation",
+     "DMD nonsense-mutation reference analysis + mechanism-level repair simulation (exon skipping, base/prime editing feasibility). Outputs mechanisms, never efficacy.",
+     "MutationIngestedTrigger",
+     "ClassifyMutationTask | SimulateRepairTask",
+     "Classify -> Codon analysis -> Mechanism sim -> Disclaimer -> Report"),
+    (140, "Cancer Dynamics",
+     "Gompertz tumor growth + therapy-response simulation (kill rate, resistance emergence, rebound detection). SIMULATED math only.",
+     "TherapyScenarioTrigger",
+     "RunGrowthSimTask | DetectReboundTask",
+     "Init -> Grow -> Treat -> Detect rebound -> Report"),
+    (141, "Sonar 5D Mesh",
+     "Crystal-mesh geometry (diamond-cubic lattice, OBJ export) + 5D sonar sweep (x,y,z,time,intensity echo field).",
+     "MeshRequestedTrigger | SweepTrigger",
+     "GenerateMeshTask | RunSweepTask | ExportObjTask",
+     "Generate -> Invariants -> Sweep -> Export -> Visualize"),
+    (142, "Genesis Optimizer",
+     "Genetic-algorithm + SPSA optimizer with pluggable fitness (sphere/rastrigin/molecule stub). Optimization artifacts only.",
+     "OptimizationRequestedTrigger",
+     "RunGaTask | RunSpsaTask",
+     "Init population -> Evolve -> SPSA refine -> Validate -> Report"),
+    (143, "Healthcare Agency",
+     "Hospital/doctor/researcher agent roster for medtech operations: triage, case review, literature matching, and audit-logged decision support.",
+     "AgencyRequestTrigger | AuditTrigger",
+     "DispatchAgencyAgentTask | AuditHealthcareActionTask",
+     "Dispatch -> Execute -> Guardrail check -> Audit -> Report"),
 ]
 
 ACCESS_LEVELS = ["read", "write", "admin"]
@@ -414,7 +444,7 @@ def main():
         print(f"[DRY-RUN] would generate {len(ENTRIES)} capabilities x 4 artifact types "
               f"+ {len(EXTENSIONS)} extensions x 4")
         assert len(ENTRIES) == 131, f"expected 131 entries, got {len(ENTRIES)}"
-        assert len(EXTENSIONS) == 6, f"expected 6 extensions, got {len(EXTENSIONS)}"
+        assert len(EXTENSIONS) == 12, f"expected 12 extensions, got {len(EXTENSIONS)}"
         return
 
     counts, index_rows = generate_set(ENTRIES, PLATFORM)

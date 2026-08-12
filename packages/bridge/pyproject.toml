@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ipp-bridge"
+version = "0.1.0"
+description = "Software bridge: module -> capability -> endpoint registry with handshake"
+requires-python = ">=3.10"
+dependencies = ["sovereign-orchestrator>=0.1"]
+
+[tool.setuptools.packages.find]
+include = ["bridge*"]

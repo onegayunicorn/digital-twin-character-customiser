@@ -1,0 +1,16 @@
+module,language,capabilities,tests,cli
+packages/theory-sim,python,"['dup physics', 'resonance', 'galaxy rotation']","tests/unit/test_dup_physics.py, test_resonance.py, test_galaxy_rotation.py",python3 -m theory_sim
+packages/earth-sim,python,"['pangaea climate', 'tectonics']",tests/unit/test_earth_sim.py,python3 -m earth_sim
+packages/sensor,python,"['IPS detection', 'DEC', 'energy reclaim']",tests/unit/test_ips_model.py,python3 -m sensor
+packages/cpf-sim,python,"['crystal nucleation', 'accretion']",tests/unit/test_cpf_sim.py,python3 -m cpf_sim
+packages/pero,python,"['photonic analysis', 'Bell/SPDC models']",tests/unit/test_pero.py,python3 -m pero
+packages/ipai-cli,python,"['MT communion', 'resonance routing']",tests/unit/test_ipai_cli.py,python3 -m ipai_cli
+packages/digital-twin,python,"['twin sync', 'event bus', 'heartbeat']",tests/unit/test_digital_twin.py,(library)
+packages/sovereign,python,"['orchestration', 'queue', 'audit', 'handshake']",tests/unit/test_sovereign.py,python3 -m sovereign
+packages/medgen,python,"['DMD mutations', 'repair sim', 'tumor dynamics']",tests/unit/test_medgen.py,python3 -m medgen
+packages/genesis,python,"['GA optimizer', 'SPSA']",tests/unit/test_genesis.py,python3 -m genesis
+packages/medagents,python,"['healthcare agency', 'triage', 'case review']",tests/unit/test_medagents.py,python3 -m medagents
+packages/sonar-5d,python,"['crystal mesh', '5D sonar sweep']",tests/unit/test_sonar_5d.py,python3 -m sonar_5d
+packages/bridge,python,"['capability routing', 'handshake']",tests/unit/test_bridge.py,python3 -m bridge
+cpp/mutation_kernel,c++,"['stop-codon scan', 'frameshift detection']",(make test),./cpp/mutation_kernel/mutation_kernel
+platform/extensions,spec,['137 capabilities total (131 core + 6+6 app)'],scripts/generate_platform_spec.py --dry-run,(generated)
