@@ -2,9 +2,11 @@
 
 Formalization of the Cloudflare Permissions & Capabilities list: **131 capabilities**,
 each mapped to a Protocol (interface contract), Trigger(s) (event sources), Workflow(s)
-(end-to-end process), and Task(s) (atomic units).
+(end-to-end process), and Task(s) (atomic units). Plus **6 app-layer
+extensions** under `extensions/`.
 
 - Base types: [`schemas/base-types.md`](schemas/base-types.md)
+- Extensions: [`extensions/README.md`](extensions/README.md)
 - Storage layout: [`manifests/buckets.yaml`](../manifests/buckets.yaml)
 - Regenerate: `python3 scripts/generate_platform_spec.py`
 

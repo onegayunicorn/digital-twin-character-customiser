@@ -28,6 +28,42 @@ from spec_data_b import ENTRIES_B  # noqa: E402
 
 ENTRIES = ENTRIES_A + ENTRIES_B
 
+# App-layer extension capabilities (batch 3, 2026-08-12): new systems added to
+# the monorepo. Generated under platform/extensions/ to keep the 131-item
+# Cloudflare contract intact.
+EXTENSIONS = [
+    (132, "Twin Engine Sync",
+     "Event-sourced digital-twin synchronization: typed event bus, versioned state store, interpolation, heartbeat staleness.",
+     "TwinStateChangedTrigger (on state update) | HeartbeatTimeoutTrigger",
+     "SyncTwinStateTask | DetectStaleTwinTask",
+     "Capture -> Version -> Broadcast -> Reconcile -> Verify"),
+    (133, "Agent Orchestration",
+     "Sovereign orchestrator core: agent lifecycle state machine, priority task queue, scheduler tick loop, memory stores, tool ACL, audit chain.",
+     "TaskQueuedTrigger | AgentReadyTrigger",
+     "DispatchTaskTask | RegisterAgentTask",
+     "Enqueue -> Schedule -> Execute -> Audit"),
+    (134, "MT Communion CLI",
+     "IpAI MirrorTwin dialogue: intent -> sentiment valence -> 3-cell resonance routing -> reply -> engram persistence.",
+     "IntentReceivedTrigger",
+     "RouteIntentTask | StoreEngramTask",
+     "Intent -> Sentiment -> Route -> Reply -> Persist"),
+    (135, "Crystal Nucleation Sim",
+     "Crystal Planet Formation engine: thermal gradient field, nucleation P = exp(-dG*/(kT)), growth, accretion feedback, stabilization.",
+     "SimulationStepTrigger | StabilizationTrigger",
+     "NucleateCrystalTask | AccreteMassTask",
+     "Init -> Nucleate -> Grow -> Feedback -> Stabilize"),
+    (136, "Photonic Analysis",
+     "PERO photonic toolkit: splitting efficiency, spatial coherence, spectral decomposition, FFT, Bell S-parameter, SPDC coincidence.",
+     "MeasurementIngestedTrigger",
+     "AnalyzeClassicalTask | VerifyQuantumTask",
+     "Ingest -> Classical metrics -> Quantum verify -> Verdict -> Report"),
+    (137, "Quantum Sphere Mode",
+     "IPS energy-sphere twin-state visualization: sphere charge state, energy metrics, phase-synced rendering.",
+     "SphereStateChangedTrigger",
+     "RenderSphereTask | ComputeEnergyTask",
+     "Sync -> Compute -> Render -> Observe"),
+]
+
 ACCESS_LEVELS = ["read", "write", "admin"]
 
 
@@ -336,18 +372,11 @@ interface TaskSpecification {
 """
 
 
-def main():
-    dry = "--dry-run" in sys.argv
+def generate_set(entries, base_dir, prefix="capability"):
+    """Generate protocol/trigger/workflow/task files for a set of entries."""
+    rows = []
     counts = {"protocols": 0, "triggers": 0, "workflows": 0, "tasks": 0}
-    index_rows = []
-
-    if dry:
-        print(f"[DRY-RUN] would generate {len(ENTRIES)} capabilities x 4 artifact types")
-        print(f"[DRY-RUN] capability count check: {len(ENTRIES)} (expect 131)")
-        assert len(ENTRIES) == 131, f"expected 131 entries, got {len(ENTRIES)}"
-        return
-
-    for num, title, purpose, triggers, tasks, workflow in ENTRIES:
+    for num, title, purpose, triggers, tasks, workflow in entries:
         slug = slugify(title)
         for sub, writer in (
             ("protocols", protocol_md),
@@ -355,7 +384,7 @@ def main():
             ("workflows", workflow_md),
             ("tasks", task_md),
         ):
-            path = os.path.join(PLATFORM, sub, f"{slug}{sub.capitalize()[:-1]}.md")
+            path = os.path.join(base_dir, sub, f"{slug}{sub.capitalize()[:-1]}.md")
             if sub == "protocols":
                 content = writer(num, title, purpose, triggers, tasks, workflow)
             elif sub == "triggers":
@@ -368,11 +397,28 @@ def main():
             with open(path, "w", encoding="utf-8") as fh:
                 fh.write(content)
             counts[sub] += 1
-        index_rows.append(
+        rows.append(
             f"| {num} | {title} | [`{slug}Protocol`](protocols/{slug}Protocol.md) | "
             f"[`{slug}Trigger`](triggers/{slug}Trigger.md) | [`{slug}Workflow`](workflows/{slug}Workflow.md) | "
             f"[`{slug}Task`](tasks/{slug}Task.md) |"
         )
+    return counts, rows
+
+
+def main():
+    dry = "--dry-run" in sys.argv
+    counts = {"protocols": 0, "triggers": 0, "workflows": 0, "tasks": 0}
+    index_rows = []
+
+    if dry:
+        print(f"[DRY-RUN] would generate {len(ENTRIES)} capabilities x 4 artifact types "
+              f"+ {len(EXTENSIONS)} extensions x 4")
+        assert len(ENTRIES) == 131, f"expected 131 entries, got {len(ENTRIES)}"
+        assert len(EXTENSIONS) == 6, f"expected 6 extensions, got {len(EXTENSIONS)}"
+        return
+
+    counts, index_rows = generate_set(ENTRIES, PLATFORM)
+    ext_counts, ext_rows = generate_set(EXTENSIONS, os.path.join(PLATFORM, "extensions"))
 
     os.makedirs(os.path.join(PLATFORM, "schemas"), exist_ok=True)
     with open(os.path.join(PLATFORM, "schemas", "base-types.md"), "w", encoding="utf-8") as fh:
@@ -382,9 +428,11 @@ def main():
 
 Formalization of the Cloudflare Permissions & Capabilities list: **{len(ENTRIES)} capabilities**,
 each mapped to a Protocol (interface contract), Trigger(s) (event sources), Workflow(s)
-(end-to-end process), and Task(s) (atomic units).
+(end-to-end process), and Task(s) (atomic units). Plus **{len(EXTENSIONS)} app-layer
+extensions** under `extensions/`.
 
 - Base types: [`schemas/base-types.md`](schemas/base-types.md)
+- Extensions: [`extensions/README.md`](extensions/README.md)
 - Storage layout: [`manifests/buckets.yaml`](../manifests/buckets.yaml)
 - Regenerate: `python3 scripts/generate_platform_spec.py`
 
@@ -400,9 +448,25 @@ each mapped to a Protocol (interface contract), Trigger(s) (event sources), Work
     with open(os.path.join(PLATFORM, "README.md"), "w", encoding="utf-8") as fh:
         fh.write(index)
 
-    print(f"Generated: protocols={counts['protocols']} triggers={counts['triggers']} "
-          f"workflows={counts['workflows']} tasks={counts['tasks']} + schemas/base-types.md + README.md")
-    print("Total artifact files:", sum(counts.values()))
+    ext_index = f"""# Platform Extensions — App-Layer Capabilities
+
+Additional capabilities added 2026-08-12 (batch 3) for the new platform systems
+(ipai-cli, digital-twin, cpf-sim, pero, sovereign). Same contract shape as the
+131-item Cloudflare specification: Protocol / Trigger / Workflow / Task.
+
+| # | Capability | Protocol | Trigger | Workflow | Task |
+|---|---|---|---|---|---|
+{chr(10).join(ext_rows)}
+
+---
+*Generated by `scripts/generate_platform_spec.py` — do not hand-edit.*
+"""
+    os.makedirs(os.path.join(PLATFORM, "extensions"), exist_ok=True)
+    with open(os.path.join(PLATFORM, "extensions", "README.md"), "w", encoding="utf-8") as fh:
+        fh.write(ext_index)
+
+    total = sum(counts.values()) + sum(ext_counts.values())
+    print(f"Core: {counts} | Extensions: {ext_counts} | Total artifact files: {total}")
 
 
 if __name__ == "__main__":

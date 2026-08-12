@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ipp-digital-twin"
+version = "0.1.0"
+description = "Twin-engine core: event bus, state store, interpolation, heartbeat, realtime hub"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.setuptools.packages.find]
+include = ["digital_twin*"]

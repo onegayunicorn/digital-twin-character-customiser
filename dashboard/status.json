@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-08-12T18:56:28.427155",
+  "platform": {
+    "spec": {
+      "protocols": 131,
+      "triggers": 131,
+      "workflows": 131,
+      "tasks": 131
+    },
+    "claims": {
+      "VERIFIED": 2,
+      "SIMULATED": 2,
+      "HYPOTHESIS": 3,
+      "UNVERIFIED-CLAIM": 3,
+      "QUARANTINED": 0
+    }
+  },
+  "simulations": {
+    "galaxy_rotation": {
+      "rms_baryonic": 0.3499,
+      "rms_cdm_nfw": 0.0341,
+      "rms_dup_pressure": 0.013,
+      "verdict": "Baryonic-only fails flat rotation curves (large decline at large r). Both the fitted NFW dark-halo model and the fitted pressure-gradient (DUP) model reproduce the flat curve. The pressure model achieves this WITHOUT dark matter \u2014 that is the theory's positive claim, and its discriminators are: (1) higher-precision data, (2) bulge/disk mass uncertainties, (3) independent probes (lensing, CMB)."
+    },
+    "orbital_dup_vs_kepler": {
+      "rms_kepler": 0.0042,
+      "rms_dup_1_over_r": 1.3513
+    }
+  },
+  "packages": [
+    "cpf-sim",
+    "digital-twin",
+    "earth-sim",
+    "ipai-cli",
+    "pero",
+    "sensor",
+    "sovereign",
+    "theory-sim"
+  ],
+  "agents": [
+    "ipai",
+    "physics-sim",
+    "sensor-design",
+    "peer-review",
+    "vr-memories",
+    "business"
+  ]
+}

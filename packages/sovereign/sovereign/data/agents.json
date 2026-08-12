@@ -1,0 +1,13 @@
+{
+  "agents": [
+    {"id": "reasoner", "role": "reasoner", "capabilities": ["analysis", "summarization"]},
+    {"id": "coder", "role": "coder", "capabilities": ["codegen", "refactor"]},
+    {"id": "tool", "role": "tool", "capabilities": ["tool_calls", "api_client"]},
+    {"id": "coordinator", "role": "coordinator", "capabilities": ["decomposition", "routing"]}
+  ],
+  "permissions": {
+    "admin": ["*"],
+    "agent": ["shell:read", "web_search", "file_ops:read"],
+    "guest": []
+  }
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Invisible Pressure Platform — Command Dashboard</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0A0A10; color: #E6E6F0; font-family: Inter, system-ui, sans-serif; padding: 24px; }
+  code, .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+  h1 { font-size: 20px; letter-spacing: 0.02em; margin-bottom: 4px; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; color: #7C7CE8; margin: 28px 0 10px; }
+  .sub { color: #8A8AA0; font-size: 12px; margin-bottom: 16px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .card { background: #12121C; border: 1px solid #23233A; border-radius: 10px; padding: 14px; }
+  .card .label { color: #8A8AA0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .card .value { font-size: 26px; font-weight: 600; margin-top: 4px; }
+  .card .value small { font-size: 13px; color: #8A8AA0; font-weight: 400; }
+  .ok { color: #4ADE80; } .warn { color: #FBBF24; } .bad { color: #F87171; } .violet { color: #A78BFA; }
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #1E1E30; }
+  th { color: #8A8AA0; font-weight: 500; text-transform: uppercase; font-size: 10.5px; letter-spacing: 0.08em; }
+  .chip { display: inline-block; background: #1A1A2E; border: 1px solid #2A2A4A; border-radius: 999px;
+          padding: 2px 10px; font-size: 11px; margin: 2px 4px 2px 0; }
+  .footer { color: #56567A; font-size: 11px; margin-top: 28px; }
+  #status-meta { color: #56567A; font-size: 11px; }
+</style>
+</head>
+<body>
+<h1>💎 Invisible Pressure Platform</h1>
+<div class="sub mono" id="status-meta">loading status.json…</div>
+
+<h2>Science Core</h2>
+<div class="grid">
+  <div class="card"><div class="label">Galaxy rotation — pressure model</div><div class="value violet" id="g-dup">—</div></div>
+  <div class="card"><div class="label">Galaxy rotation — NFW dark halo</div><div class="value" id="g-cdm">—</div></div>
+  <div class="card"><div class="label">Galaxy rotation — baryonic only</div><div class="value bad" id="g-bary">—</div></div>
+  <div class="card"><div class="label">Orbital — Kepler RMS</div><div class="value ok" id="o-kepler">—</div></div>
+  <div class="card"><div class="label">Orbital — DUP 1/r RMS</div><div class="value bad" id="o-dup">—</div></div>
+</div>
+
+<h2>Claims Register</h2>
+<div class="grid" id="claims"></div>
+
+<h2>Platform Contract</h2>
+<div class="grid" id="spec"></div>
+
+<h2>Agents & Packages</h2>
+<div class="card" id="agents">—</div>
+<div class="card" style="margin-top:12px" id="packages">—</div>
+
+<h2>Simulation CLI (quickstart)</h2>
+<div class="card mono" style="font-size:12px; line-height:1.7">
+  python3 -m theory_sim --mode galaxy<br>
+  python3 -m theory_sim --mode dup<br>
+  python3 -m earth_sim --mode climate<br>
+  python3 -m cpf_sim --size 64<br>
+  python3 -m pero --mode quantum<br>
+  python3 -m ipai_cli --intent "birth equity from light"<br>
+  python3 -m sovereign --serve --port 8787
+</div>
+
+<div class="footer">Invisible Pressure Platform · all scientific claims verified per docs/theory/04-claims-register.md · data endpoint: status.json (regenerate with scripts/gen_status_json.py)</div>
+
+<script>
+fetch('status.json').then(r => r.json()).then(s => {
+  const fmt = v => (v*100).toFixed(1)+'%';
+  document.getElementById('status-meta').textContent = 'generated: ' + s.generated_at + ' · repo: invisible-pressure-platform';
+  const g = s.simulations.galaxy_rotation, o = s.simulations.orbital_dup_vs_kepler;
+  document.getElementById('g-dup').innerHTML = fmt(g.rms_dup_pressure)+' <small>RMS — theory&apos;s positive claim</small>';
+  document.getElementById('g-cdm').innerHTML = fmt(g.rms_cdm_nfw)+' <small>RMS</small>';
+  document.getElementById('g-bary').innerHTML = fmt(g.rms_baryonic)+' <small>RMS — fails flat curves</small>';
+  document.getElementById('o-kepler').innerHTML = fmt(o.rms_kepler)+' <small>RMS</small>';
+  document.getElementById('o-dup').innerHTML = fmt(o.rms_dup_1_over_r)+' <small>RMS — falsified at planetary scale</small>';
+  const claims = s.platform.claims;
+  document.getElementById('claims').innerHTML = Object.entries(claims)
+    .map(([k,v]) => `<div class="card"><div class="label">${k}</div><div class="value">${v}</div></div>`).join('');
+  const spec = s.platform.spec;
+  document.getElementById('spec').innerHTML = Object.entries(spec)
+    .map(([k,v]) => `<div class="card"><div class="label">${k}</div><div class="value">${v}</div></div>`).join('');
+  document.getElementById('agents').innerHTML = s.agents.map(a => `<span class="chip">${a}</span>`).join('');
+  document.getElementById('packages').innerHTML = s.packages.map(p => `<span class="chip">${p}</span>`).join('');
+}).catch(e => { document.getElementById('status-meta').textContent = 'status.json not found — run scripts/gen_status_json.py'; });
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "id": "task-sample-001",
+  "prompt": "Summarize the DUP galaxy rotation-curve fit results",
+  "priority": 1,
+  "subtasks": [
+    {"agent": "reasoner", "prompt": "summarize theory-sim galaxy run"},
+    {"agent": "coder", "prompt": "export fit figures"}
+  ]
+}

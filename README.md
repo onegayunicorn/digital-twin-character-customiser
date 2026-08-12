@@ -44,8 +44,12 @@ A complete, platform-first build package covering:
 │   ├── theory-sim/           #   DUP physics + resonance + galaxy rotation (Python/NumPy/SciPy)
 │   ├── earth-sim/            #   Pangaea Proxima: climate + tectonics models
 │   ├── sensor/               #   IPS nanophotonic detection models (Python/NumPy)
+│   ├── cpf-sim/              #   Crystal Planet Formation (nucleation/accretion)
+│   ├── pero/                 #   Photonic analysis: classical metrics + Bell/SPDC quantum models
+│   ├── ipai-cli/             #   IpAI MT Communion CLI (sentiment + resonance routing + engrams)
+│   ├── sovereign/            #   Orchestrator core: agents, queue, scheduler, memory, tools, audit, HTTP API
+│   ├── digital-twin/         #   Twin engine: event bus, state store, interpolation, heartbeat
 │   ├── ai-chat/              #   LLM chat module (AI Gateway + Vectorize RAG)
-│   ├── digital-twin/         #   Twin state sync, event sourcing
 │   ├── ar-vr/                #   WebXR scenes, sphere visualization
 │   └── api/                  #   Cloudflare Workers API (REST/WebSocket)
 ├── platform/                 # Platform contract (generated, do not hand-edit)
@@ -53,8 +57,10 @@ A complete, platform-first build package covering:
 │   ├── triggers/             #   131 trigger definitions
 │   ├── workflows/            #   131 workflow definitions
 │   ├── tasks/                #   131 task definitions
+│   ├── extensions/           #   6 app-layer capabilities (twin sync, orchestration, CLI, CPF, PERO, sphere)
 │   ├── manifests/            #   Declarative configs (buckets, wrangler, CI)
 │   └── schemas/              #   Base types & validation schemas
+├── dashboard/                # Platform command dashboard (static HTML + status.json)
 ├── agents/                   # Agent definitions (YAML/MD)
 ├── docs/
 │   ├── theory/               # Theory consolidation + claims register

@@ -7,6 +7,10 @@
 - ✅ Galaxy rotation-curve sim: pressure model 1.3% vs NFW 3.4% RMS (first quantitative pass)
 - ✅ Earth-250M sim (Pangaea Proxima): climate + tectonics packages, tested
 - ✅ Research batch 2026-08-12 analyzed (diamond qubits, NAVT, FUTUREMAP, Earth-250M, RIPE) → docs/research/ + claims register §E
+- ✅ Research batch 2026-08-12b analyzed (fake-space quarantined, MT Communion, CPF, PERO, Sovereign Orchestrator, Universal Driver) → docs/research/06-11 + claims register §F
+- ✅ New packages live: ipai-cli, digital-twin, cpf-sim, pero, sovereign (71 tests green)
+- ✅ Platform extensions: 6 app-layer capabilities (twin sync, orchestration, MT CLI, CPF, PERO, sphere mode)
+- ✅ Command dashboard (dashboard/index.html + status.json) with live sim + claims + spec status
 - ✅ Domains checked: duptheory.com + invisiblepressure.ai available; invisiblepressure.com taken
 - ✅ GitHub repo live (invisible-pressure-platform)
 - 🔵 Claims register published; repo public (MIT software)

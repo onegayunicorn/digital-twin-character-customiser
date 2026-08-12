@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ipai-cli"
+version = "0.1.0"
+description = "IpAI MT Communion CLI — intent to MirrorTwin dialogue with resonance routing"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.26"]
+
+[tool.setuptools.packages.find]
+include = ["ipai_cli*"]
