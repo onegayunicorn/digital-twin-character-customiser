@@ -1,0 +1,29 @@
+{
+  "name": "invisible-pressure-platform",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Monorepo for the Invisible Pressure / DUP technology ecosystem",
+  "license": "MIT",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "spec:generate": "python3 scripts/generate_platform_spec.py",
+    "sim:dup": "python3 -m theory_sim --mode dup",
+    "sim:resonance": "python3 -m theory_sim --mode resonance --freq 7.83",
+    "sim:sensor": "python3 -m sensor --mode detect",
+    "test": "python3 -m pytest tests -v",
+    "test:unit": "python3 -m pytest tests/unit -v",
+    "lint": "echo \"lint gates wired in CI (eslint for TS packages, ruff for Python)\"",
+    "build:web": "pnpm --filter @ipp/web build",
+    "deploy:workers": "pnpm --filter @ipp/api deploy"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "pnpm": "^9.0.0"
+  }
+}

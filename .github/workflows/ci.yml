@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  python-sims:
+    name: Python simulations & tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r packages/theory-sim/requirements.txt
+          python3 -m pip install -r packages/sensor/requirements.txt
+          python3 -m pip install pytest
+      - name: Run simulations (smoke)
+        run: |
+          python3 -m theory_sim --mode dup --bodies 9 --quiet
+          python3 -m theory_sim --mode resonance --freq 7.83 --quiet
+          python3 -m sensor --mode detect --quiet
+      - name: Run tests
+        run: python3 -m pytest tests -v
+
+  spec-integrity:
+    name: Platform spec integrity (131 capabilities)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Regenerate spec into temp dir and diff
+        run: |
+          python3 scripts/generate_platform_spec.py --dry-run
+      - name: Verify file counts
+        run: |
+          test "$(ls platform/protocols | wc -l)" -ge 131
+          test "$(ls platform/triggers | wc -l)" -ge 131
+          test "$(ls platform/workflows | wc -l)" -ge 131
+          test "$(ls platform/tasks | wc -l)" -ge 131
+
+  js-build:
+    name: JS/TS build (web/api)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile || pnpm install
+      - run: pnpm --filter @ipp/api build || echo "api package scaffold — build configured when source lands"

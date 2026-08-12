@@ -1,0 +1,45 @@
+# Cloudflare R2 bucket layout — Invisible Pressure Platform
+# Buckets are the object-storage backbone; D1/KV/Vectorize handle structured state.
+# Naming: <env>-<domain>-<purpose> (env: dev | staging | prod)
+
+buckets:
+  - name: dev-ipp-docs
+    purpose: Theory manuscripts, claims register, peer-review artifacts (versioned)
+    lifecycle: versioned, 5-year retention
+    access: private + signed URLs for reviewers
+
+  - name: dev-ipp-sims
+    purpose: Simulation outputs (JSON traces, CSVs, figures), DUP/IPS run artifacts
+    lifecycle: 90-day hot, archive to cold tier
+    access: private; public bucket for published figures
+
+  - name: dev-ipp-sensor
+    purpose: Raw sensor telemetry (IPS phase-shift streams, entropy reclaim logs)
+    lifecycle: append-only, partitioned by day, 400-day retention (HIPAA-grade if BCI)
+    access: private, Workers-only via R2 bindings
+
+  - name: dev-ipp-vrmemories
+    purpose: VR memory assets (3D scenes, voice models, emotion profiles) — user content
+    lifecycle: user-owned, hard-delete API with consent audit trail
+    access: private; signed per-user URLs; zero public exposure
+
+  - name: dev-ipp-apps
+    purpose: App build artifacts, OTA updates (APK/EXE/desktop bundles), web assets
+    lifecycle: 30-day old versions pruned
+    access: public CDN (via Cloudflare Cache/Images/Stream)
+
+  - name: dev-ipp-models
+    purpose: Trained embeddings, fine-tuned model weights, vector checkpoints
+    lifecycle: versioned, immutable
+    access: private
+
+  - name: dev-ipp-archive
+    purpose: Cold archive — sealed milestones (Yggdrasil-style taxonomy: root/trunk/branches/leaves)
+    lifecycle: write-once-read-many, immutable object lock
+    access: private, audit-gated
+
+# Cross-cutting rules
+rules:
+  encryption: SSE default (R2), client-side for PII (VR memories, health data)
+  public_egress: only docs/sims-figures/apps buckets; everything else private
+  cost_control: lifecycle rules mandatory; alert at 80% of monthly budget per bucket

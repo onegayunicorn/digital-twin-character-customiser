@@ -1,0 +1,10 @@
+pyproject.toml
+theory_sim/__init__.py
+theory_sim/__main__.py
+theory_sim/dup_physics.py
+theory_sim/resonance.py
+theory_sim.egg-info/PKG-INFO
+theory_sim.egg-info/SOURCES.txt
+theory_sim.egg-info/dependency_links.txt
+theory_sim.egg-info/requires.txt
+theory_sim.egg-info/top_level.txt

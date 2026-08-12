@@ -1,0 +1,9 @@
+pyproject.toml
+ipp_sensor.egg-info/PKG-INFO
+ipp_sensor.egg-info/SOURCES.txt
+ipp_sensor.egg-info/dependency_links.txt
+ipp_sensor.egg-info/requires.txt
+ipp_sensor.egg-info/top_level.txt
+sensor/__init__.py
+sensor/__main__.py
+sensor/ips_model.py
