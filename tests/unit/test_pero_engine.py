@@ -39,8 +39,10 @@ def test_dephase_channel_preserves_trace():
 
 def test_entanglement_decays_under_dephasing():
     res = entanglement_evolution(pure_bell_rho(), dephase_steps=100, p_step=0.05)
-    assert res["final_fidelity"] < 0.5
-    assert res["final_concurrence"] < 0.5  # decays from 1.0 under dephasing
+    # dephasing drives fidelity toward the 0.5 mixed-state floor and concurrence to 0
+    assert res["final_fidelity"] < 0.55
+    assert res["final_fidelity"] > 0.5  # floor, not below
+    assert res["final_concurrence"] < 0.5  # decays from 1.0
     assert "disclaimer" in res
 
 
