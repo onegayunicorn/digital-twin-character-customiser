@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "quantum-hub",
+    "url": "https://github.com/onegayunicorn/quantum-hub"
+  },
+  "domain": "quantum",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

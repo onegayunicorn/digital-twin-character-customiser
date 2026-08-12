@@ -92,6 +92,56 @@ EXTENSIONS = [
      "AgencyRequestTrigger | AuditTrigger",
      "DispatchAgencyAgentTask | AuditHealthcareActionTask",
      "Dispatch -> Execute -> Guardrail check -> Audit -> Report"),
+    (144, "Governance Orchestrator",
+     "Dispatch-coordination agent: routes task batches to agents by role with audit logging.",
+     "BatchReceivedTrigger",
+     "RouteBatchTask | LogDispatchTask",
+     "Ingest -> Route -> Dispatch -> Audit"),
+    (145, "Gatekeeper",
+     "Policy gate: blocks unverified claim markers and enforces ACLs. The enforcement point of the claims register.",
+     "ContentSubmittedTrigger | AccessRequestTrigger",
+     "CheckClaimsTask | CheckAclTask",
+     "Submit -> Check claims -> Check ACL -> Allow/Block -> Log"),
+    (146, "Watcher",
+     "Health monitoring: heartbeat staleness, spec integrity counts, test status; flags attention items.",
+     "HealthCheckTrigger | SpecDriftTrigger",
+     "ScanHeartbeatsTask | VerifySpecCountsTask",
+     "Collect -> Compare -> Flag -> Report"),
+    (147, "Tallyman",
+     "Accounting agent: aggregates task/test/claim counts and cost metrics; flags anomalies.",
+     "TallyRequestTrigger",
+     "AggregateMetricsTask | FlagAnomalyTask",
+     "Collect metrics -> Aggregate -> Flag -> Report"),
+    (148, "Chat Agent",
+     "Operator dialogue router: intent -> governance agent or direct reply; refuses quarantined requests.",
+     "MessageReceivedTrigger",
+     "RouteIntentTask | RefuseQuarantinedTask",
+     "Parse -> Classify -> Route/Refuse -> Reply"),
+    (149, "Matrix Integration",
+     "Build adjacency matrices from repo inventories and dependency declarations; graph metrics (density, centrality).",
+     "InventoryUpdatedTrigger",
+     "BuildAdjacencyTask | ComputeGraphMetricsTask",
+     "Load inventory -> Build matrix -> Metrics -> Report"),
+    (150, "Matrix Evolution",
+     "GA over adjacency matrices toward structural targets (density, degree skew) using the genesis engine.",
+     "EvolutionRequestedTrigger",
+     "EvolveMatrixTask",
+     "Encode -> Evolve -> Decode -> Validate -> Report"),
+    (151, "Mathematical Hardening",
+     "Numerical stability checks: condition estimates, residual norms, relative error bounds for sim outputs.",
+     "SimOutputReadyTrigger",
+     "EstimateConditionTask | CheckResidualTask",
+     "Analyze -> Condition -> Residual -> Grade -> Report"),
+    (152, "Repo Sandbox",
+     "Per-repository agent + sandbox workspace generation from the 420-repo inventory (manifest, sim stub, README).",
+     "RepoInventoriedTrigger",
+     "GenerateSandboxTask | InstantiateRepoAgentTask",
+     "Load repo -> Generate sandbox -> Agent -> Verify -> Report"),
+    (153, "Pipeline Runner",
+     "Declarative pipelines: ordered steps referencing queue tasks with dependency gating and audit.",
+     "PipelineSubmittedTrigger",
+     "ExecutePipelineTask | GateDependenciesTask",
+     "Validate -> Enqueue steps -> Dispatch -> Audit -> Report"),
 ]
 
 ACCESS_LEVELS = ["read", "write", "admin"]
@@ -444,7 +494,7 @@ def main():
         print(f"[DRY-RUN] would generate {len(ENTRIES)} capabilities x 4 artifact types "
               f"+ {len(EXTENSIONS)} extensions x 4")
         assert len(ENTRIES) == 131, f"expected 131 entries, got {len(ENTRIES)}"
-        assert len(EXTENSIONS) == 12, f"expected 12 extensions, got {len(EXTENSIONS)}"
+        assert len(EXTENSIONS) == 22, f"expected 22 extensions, got {len(EXTENSIONS)}"
         return
 
     counts, index_rows = generate_set(ENTRIES, PLATFORM)

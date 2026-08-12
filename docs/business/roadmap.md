@@ -11,6 +11,10 @@
 - ✅ New packages live: ipai-cli, digital-twin, cpf-sim, pero, sovereign (71 tests green)
 - ✅ Platform extensions: 6 app-layer capabilities (twin sync, orchestration, MT CLI, CPF, PERO, sphere mode)
 - ✅ Command dashboard (dashboard/index.html + status.json) with live sim + claims + spec status
+- ✅ Healthcare batch (2026-08-12c): medgen, genesis, medagents, sonar-5d, bridge packages + C++ mutation kernel (103 tests green)
+- ✅ Medtech GTM + procurement docs; NIH SBIR templates; global regulatory map
+- ✅ Spec extensions 138-143 (Medical Decision Support, DMD Repair Sim, Cancer Dynamics, Sonar 5D Mesh, Genesis Optimizer, Healthcare Agency)
+- ✅ Code matrix (docs/code-matrix.csv) + apps/web portal scaffold
 - ✅ Domains checked: duptheory.com + invisiblepressure.ai available; invisiblepressure.com taken
 - ✅ GitHub repo live (invisible-pressure-platform)
 - 🔵 Claims register published; repo public (MIT software)

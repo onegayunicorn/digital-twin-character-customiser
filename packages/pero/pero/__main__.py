@@ -71,11 +71,30 @@ def _quantum(quiet: bool) -> int:
     return 0
 
 
+def _engine(quiet: bool) -> int:
+    from .engine import entanglement_evolution, pure_bell_rho
+    res = entanglement_evolution(pure_bell_rho(), dephase_steps=50, p_step=0.02)
+    if quiet:
+        print(f"pero engine ok: F_end={res['final_fidelity']:.4f} "
+              f"C_end={res['final_concurrence']:.4f}")
+        return 0
+    print("=" * 60)
+    print("PERO — photonic entanglement engine (dephasing model)")
+    print("=" * 60)
+    print(f"  Initial fidelity (Bell |phi+>) : 1.0000")
+    print(f"  Fidelity after dephasing       : {res['final_fidelity']:.4f}")
+    print(f"  Concurrence after dephasing    : {res['final_concurrence']:.4f}")
+    print(f"  {res['disclaimer']}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="pero", description="Photonic analysis toolkit")
-    ap.add_argument("--mode", choices=["classical", "quantum"], default="classical")
+    ap.add_argument("--mode", choices=["classical", "quantum", "engine"], default="classical")
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args(argv)
+    if args.mode == "engine":
+        return _engine(args.quiet)
     return _classical(args.quiet) if args.mode == "classical" else _quantum(args.quiet)
 
 

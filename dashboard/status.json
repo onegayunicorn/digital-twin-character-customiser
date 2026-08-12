@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-12T19:33:07.523673",
+  "generated_at": "2026-08-12T21:46:56.155027",
   "platform": {
     "spec": {
       "protocols": 131,
@@ -8,10 +8,10 @@
       "tasks": 131
     },
     "claims": {
-      "VERIFIED": 2,
-      "SIMULATED": 2,
-      "HYPOTHESIS": 3,
-      "UNVERIFIED-CLAIM": 3,
+      "VERIFIED": 0,
+      "SIMULATED": 0,
+      "HYPOTHESIS": 0,
+      "UNVERIFIED-CLAIM": 0,
       "QUARANTINED": 0
     }
   },
@@ -33,10 +33,13 @@
     "digital-twin",
     "earth-sim",
     "genesis",
+    "governance",
     "ipai-cli",
+    "matrix-core",
     "medagents",
     "medgen",
     "pero",
+    "repo-agent",
     "sensor",
     "sonar-5d",
     "sovereign",

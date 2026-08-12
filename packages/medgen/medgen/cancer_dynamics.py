@@ -35,6 +35,7 @@ def therapy_response(t: np.ndarray, n0: float, alpha: float, beta: float,
             -resistance_rate * (tt - therapy_start))
         n[i] = n[i - 1] + grow * (t[i] - t[i - 1]) - kill * n[i - 1] * (t[i] - t[i - 1])
         n[i] = max(n[i], 0.0)
+    
     start_i = int(therapy_start)
     nadir_idx = start_i + int(np.argmin(n[start_i:]))
     rebound = n[-1] > n[nadir_idx] * 1.05 and resistance_rate > 0

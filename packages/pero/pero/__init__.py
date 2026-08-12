@@ -15,10 +15,13 @@ from .classical import (fft_dominant_frequency, spatial_coherence,
                         tilt_coherence_prediction)
 from .quantum import (bell_s_parameter, classify_quantum_evidence,
                       spdc_coincidence_rate, spdc_pair_rate)
+from .engine import (bell_state_fidelity, concurrence, dephase_channel,
+                     entanglement_evolution, pure_bell_rho)
 
 __all__ = [
     "splitting_efficiency", "spatial_coherence", "spectral_decomposition",
     "fft_dominant_frequency", "tilt_coherence_prediction",
     "bell_s_parameter", "classify_quantum_evidence", "spdc_coincidence_rate",
-    "spdc_pair_rate",
+    "spdc_pair_rate", "bell_state_fidelity", "concurrence", "dephase_channel",
+    "entanglement_evolution", "pure_bell_rho",
 ]

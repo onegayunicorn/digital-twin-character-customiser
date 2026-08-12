@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "matrix-core"
+version = "0.1.0"
+description = "Matrix integration, matrix evolution (GA), and mathematical hardening for the platform"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.26", "genesis>=0.1"]
+
+[tool.setuptools.packages.find]
+include = ["matrix_core*"]

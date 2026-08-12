@@ -36,7 +36,9 @@ A complete, platform-first build package covering:
 
 ```
 ├── apps/                     # Multi-platform frontends
-│   ├── web/                  #   React (Vite) web app
+│   ├── web/                  #   IPP portal console (Vite scaffold) + dashboard
+├── cpp/                      # Compiled native modules
+│   └── mutation_kernel/      #   C++ stop-codon/frameshift analysis kernel (g++ build)
 │   ├── mobile/               #   Flutter app (iOS/Android)
 │   └── desktop/              #   Tauri desktop shell
 ├── packages/                 # Shared libraries & services
@@ -49,6 +51,11 @@ A complete, platform-first build package covering:
 │   ├── ipai-cli/             #   IpAI MT Communion CLI (sentiment + resonance routing + engrams)
 │   ├── sovereign/            #   Orchestrator core: agents, queue, scheduler, memory, tools, audit, HTTP API
 │   ├── digital-twin/         #   Twin engine: event bus, state store, interpolation, heartbeat
+│   ├── medgen/               #   Medical-genetics sims: DMD nonsense mutations, repair mechanisms, tumor dynamics (SIMULATED)
+│   ├── genesis/              #   Genesis Engine: GA + SPSA optimizer (cleaned, numpy-only)
+│   ├── medagents/            #   Healthcare agency agents: hospital triage, doctor case review, researcher match (decision-support only)
+│   ├── sonar-5d/             #   Crystal-mesh geometry + 5D sonar sweep (OBJ export)
+│   ├── bridge/               #   Software bridge: capability routing registry + handshake
 │   ├── ai-chat/              #   LLM chat module (AI Gateway + Vectorize RAG)
 │   ├── ar-vr/                #   WebXR scenes, sphere visualization
 │   └── api/                  #   Cloudflare Workers API (REST/WebSocket)
