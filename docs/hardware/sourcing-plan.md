@@ -63,8 +63,22 @@ Include compliance cost (est. $3-8K per certification) in phase budgets.
 3. **Import duties** (AU → local): include 5-10% buffer + freight.
 4. **IP protection:** fabrication details as trade secrets; NDAs for specialty vendors.
 
-## 6. Next actions (offer)
+## 6. Live search results (2026-08-12, Alibaba.com)
 
-- Run live supplier searches on Alibaba for any of the above component categories
-  (e.g., "532nm laser diode module", "graphene supercapacitor 1F", "ESP32 development
-  board bulk", "photodiode array"). Just name the component and target quantity/MOQ.
+| Component | Query | Results | Match quality | Outcome |
+|---|---|---|---|---|
+| Laser diode module | "532nm green laser diode module" | 80 products | 24 perfect (verified suppliers among them) | Sufficient — no pivot; low-cost modules from $1.40-7.50/unit available |
+| Supercapacitor | "graphene supercapacitor 1F" | 70 products | 5 direct 1F matches; 16% attribute match (< 25%) | Pivoted to suppliers: 115 suppliers, 40% capacitance-customization capability — strong pool |
+
+Key findings for BOM: 532 nm modules are commodity-priced (sub-$10 at MOQ 1-10, ~$2-5
+at MOQ 100); graphene supercapacitors with exact 1F/5.5V-3V specs are available from
+several Shenzhen manufacturers (~$0.09-0.75/unit at MOQ 100), and large capacitor OEMs
+offer capacitance customization for the <5 ns dump path. **Phase-0 budget impact: BOM
+rows 1 and 9 are cheaper than the original estimates; update budget at next review.**
+
+## 7. Next actions
+
+- Request datasheets + samples before MOQ orders (verify ESR for the 1F cells — the
+  <5 ns dump requirement needs low-ESR parts, not generic 1F cells).
+- Further live searches available on request: ESP32 dev boards, photodiode arrays,
+  beam splitters, graphene coupons, DEC coil PCB fab.

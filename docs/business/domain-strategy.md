@@ -3,19 +3,19 @@
 **Owner:** Business Agent · Platform: Cloudflare Registrar + DNS (per the 131-item spec:
 `RegistrarDomainsAdmin`, `AccountDNSSettingsWrite`, `AccountSSLandCertificatesWrite`).
 
-## 1. Naming candidates (verify availability before use)
+## 1. Naming candidates (availability verified 2026-08-12 via ICANN RDAP)
 
-| Candidate | Suitability | Notes |
-|---|---|---|
-| `invisiblepressure.com` | High — descriptive | Primary contender |
-| `invisiblepressure.ai` | High — tech positioning | If available via .ai registry |
-| `duptheory.com` / `dup.space` | Medium | Theory brand |
-| `vrmemories.app` / `vrmemories.io` | High for VR line | Product brand |
-| `ipssensor.com` / `ipstech.io` | Medium | Hardware line |
+| Candidate | Suitability | Availability | Notes |
+|---|---|---|---|
+| `invisiblepressure.com` | High — descriptive | **REGISTERED** | NameCheap, registered 2022-02-04, expires 2027-02-04, status "client transfer prohibited" (parked) — not available without a buy-out negotiation |
+| `invisiblepressure.ai` | High — tech positioning | **AVAILABLE** (registry RDAP 404) | Verify at registrar at purchase time |
+| `duptheory.com` | Medium | **AVAILABLE** (RDAP 404) | Theory brand |
+| `dup.space` / `vrmemories.app` / `vrmemories.io` / `ipssensor.com` | Medium-high | not yet checked | Check before use |
+| `ipstech.io` | Medium | not yet checked | Hardware line |
 
-**Recommendation:** acquire a **brand master domain** (e.g. `invisiblepressure.com`) for
-the company + product subdomains, and one product domain per line (VRmemories, IPS) when
-budget allows. Do not squat; register only what will be used.
+**Recommendation:** with `invisiblepressure.com` taken, the acquisition priority is
+**`invisiblepressure.ai`** (brand master) or **`duptheory.com`** (theory brand) — register
+one of them soon; do not squat; register only what will be used.
 
 ## 2. DNS & infrastructure layout (Cloudflare)
 
