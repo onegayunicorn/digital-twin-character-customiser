@@ -31,9 +31,21 @@ from .supplychain import SupplyChain
 from .offgrid import OffGridNode
 from .nfc_escrow import NfcEscrowBridge
 from .twins import CommerceTwinHub
+from .identity import DidRegistry, GayaWallet, KnoxBinding, LineageBridge, PqcSigner
+from .payments_ext import ExpiryScheduler, ReplayProtector, WebhookValidator
+from .tenants import TenantRegistry
+from .governance import (AdvisoryCouncil, ContributorLicense, GovernanceCharter,
+                         Marketplace, PolicyLibrary, RevenueShare)
+from .agents import make_agent
+from .triggers import TriggerBus, DEFAULT_TRIGGERS
 
 __all__ = ["SovereignKernel", "PRIMITIVES", "DOMAINS", "domain_by_name",
            "JurisdictionEngine", "ComplianceOS", "GATE_ORDER", "EntityRegistry",
            "ENTITY_TYPES", "Ledger", "LedgerError", "StripeClient",
            "PaymentOrchestrator", "ProcurementEngine", "SupplyChain",
-           "OffGridNode", "NfcEscrowBridge", "CommerceTwinHub"]
+           "OffGridNode", "NfcEscrowBridge", "CommerceTwinHub",
+           "DidRegistry", "GayaWallet", "KnoxBinding", "LineageBridge", "PqcSigner",
+           "ExpiryScheduler", "ReplayProtector", "WebhookValidator",
+           "TenantRegistry", "AdvisoryCouncil", "ContributorLicense",
+           "GovernanceCharter", "Marketplace", "PolicyLibrary", "RevenueShare",
+           "make_agent", "TriggerBus", "DEFAULT_TRIGGERS"]

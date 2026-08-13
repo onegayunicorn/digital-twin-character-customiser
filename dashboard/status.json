@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-13T14:13:56.307460",
+  "generated_at": "2026-08-13T16:46:19.632902",
   "platform": {
     "spec": {
       "protocols": 131,
@@ -8,11 +8,11 @@
       "tasks": 131
     },
     "claims": {
-      "VERIFIED": 0,
-      "SIMULATED": 0,
-      "HYPOTHESIS": 0,
-      "UNVERIFIED-CLAIM": 0,
-      "QUARANTINED": 0
+      "VERIFIED": 2,
+      "SIMULATED": 2,
+      "HYPOTHESIS": 3,
+      "UNVERIFIED-CLAIM": 3,
+      "QUARANTINED": 1
     }
   },
   "simulations": {

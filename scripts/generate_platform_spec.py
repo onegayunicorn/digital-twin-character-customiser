@@ -187,6 +187,36 @@ EXTENSIONS = [
      "NfcTapTrigger | ConditionVerifiedTrigger",
      "TapHoldTask | ReleaseOrRefundTask",
      "Tap -> Hold -> Verify -> Release/Refund -> Audit"),
+    (163, "Identity & PQC Signing",
+     "DID registry, Knox Bio-Node attestation binding, PQC (Dilithium) signing interface — STUB (HMAC stand-in, not real PQC), Gaya Wallet MPC m-of-n signing, Quantum Lineage Bridge.",
+     "DidVerifiedTrigger | KnoxAttestedTrigger",
+     "CreateDidTask | SignPqcTask | BindKnoxTask",
+     "Create DID -> Bind -> Attest -> Sign -> Verify -> Report"),
+    (164, "Multi-Tenant Isolation",
+     "Per-tenant encryption keys, DID bindings, webhook secrets, expiry schedules, and isolated state stores.",
+     "TenantCreatedTrigger",
+     "CreateTenantTask | DeriveTenantKeyTask",
+     "Register -> Derive keys -> Bind DID -> Isolate state -> Verify"),
+    (165, "Governance & Licensing",
+     "Governance charter, contributor license terms, policy library, advisory council workflow, revenue-sharing hooks, marketplace governance.",
+     "ProposalSubmittedTrigger | MarketplaceListedTrigger",
+     "RunCouncilVoteTask | SplitRevenueTask | PublishPolicyTask",
+     "Propose -> Vote -> Approve -> License -> Monetize -> Audit"),
+    (166, "Webhook Validator",
+     "HMAC-SHA256 webhook signature validation with per-tenant secrets.",
+     "WebhookReceivedTrigger",
+     "ValidateSignatureTask | LogWebhookTask",
+     "Receive -> Validate HMAC -> Accept/Reject -> Log"),
+    (167, "Expiry Scheduler",
+     "Seven-day authorization expiry with hourly scheduler tick; expires stale authorizations.",
+     "ExpiryTickTrigger | AuthorizationCreatedTrigger",
+     "RegisterAuthorizationTask | RunExpiryTickTask",
+     "Register -> Tick hourly -> Expire stale -> Notify"),
+    (168, "Agent Trigger Bus",
+     "Autonomous wake-up layer: declarative topic -> agent routing for the 13-agent roster (identity/payment/escrow/compliance/governance/twin/offgrid flows).",
+     "AnyPlatformEventTrigger",
+     "RouteTriggerTask | WakeAgentTask",
+     "Event -> Route -> Wake agents -> Collect results -> Log"),
 ]
 
 ACCESS_LEVELS = ["read", "write", "admin"]
@@ -539,7 +569,7 @@ def main():
         print(f"[DRY-RUN] would generate {len(ENTRIES)} capabilities x 4 artifact types "
               f"+ {len(EXTENSIONS)} extensions x 4")
         assert len(ENTRIES) == 131, f"expected 131 entries, got {len(ENTRIES)}"
-        assert len(EXTENSIONS) == 31, f"expected 31 extensions, got {len(EXTENSIONS)}"
+        assert len(EXTENSIONS) == 37, f"expected 37 extensions, got {len(EXTENSIONS)}"
         return
 
     counts, index_rows = generate_set(ENTRIES, PLATFORM)
