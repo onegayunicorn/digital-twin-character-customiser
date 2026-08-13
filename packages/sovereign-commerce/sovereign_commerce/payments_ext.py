@@ -19,8 +19,8 @@ class ExpiryScheduler:
         self._expired: list[str] = []
 
     def register(self, auth_id: str, created_at: float | None = None) -> None:
-        self._auths[auth_id] = {"created_at": created_at or time.time(),
-                                "status": "active"}
+        self._auths[auth_id] = {"created_at": created_at if created_at is not None
+                                else time.time(), "status": "active"}
 
     def tick(self, now: float | None = None) -> list[str]:
         """One scheduler tick (call hourly). Returns newly expired ids."""

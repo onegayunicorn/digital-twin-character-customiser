@@ -131,6 +131,8 @@ class RevenueShare:
                      contributor_share_pct: float, contributor_acct: str,
                      platform_acct: str) -> dict:
         res = self.split(revenue, contributor_share_pct)
+        # balanced: debit the revenue source, credit platform + contributor
+        self.ledger.post("revenue-in", -revenue, f"revenue received: {item_id}")
         self.ledger.post(platform_acct, res["platform"], f"revenue share: {item_id}")
         self.ledger.post(contributor_acct, res["contributor"], f"contributor share: {item_id}")
         return res
