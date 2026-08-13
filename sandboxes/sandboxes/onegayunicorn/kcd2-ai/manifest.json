@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "KCD2-AI",
+    "url": "https://github.com/onegayunicorn/KCD2-AI"
+  },
+  "domain": "ai-chat-llm",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

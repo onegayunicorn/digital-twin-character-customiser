@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "GPT-Anchor-Orchestrator",
+    "url": "https://github.com/onegayunicorn/GPT-Anchor-Orchestrator"
+  },
+  "domain": "orchestrator-agent",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

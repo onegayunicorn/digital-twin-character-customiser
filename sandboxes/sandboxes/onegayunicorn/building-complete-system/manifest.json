@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "Building_Complete_System",
+    "url": "https://github.com/onegayunicorn/Building_Complete_System"
+  },
+  "domain": "dashboard-ui",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

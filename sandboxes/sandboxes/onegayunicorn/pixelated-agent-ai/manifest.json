@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "pixelated-agent.ai",
+    "url": "https://github.com/onegayunicorn/pixelated-agent.ai"
+  },
+  "domain": "orchestrator-agent",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

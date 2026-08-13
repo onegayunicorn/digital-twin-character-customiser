@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "Gemma-Quantum-Agent",
+    "url": "https://github.com/onegayunicorn/Gemma-Quantum-Agent"
+  },
+  "domain": "quantum",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

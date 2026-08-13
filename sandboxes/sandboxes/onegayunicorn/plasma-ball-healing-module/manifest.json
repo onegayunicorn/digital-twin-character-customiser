@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "Plasma-Ball-Healing-Module",
+    "url": "https://github.com/onegayunicorn/Plasma-Ball-Healing-Module"
+  },
+  "domain": "bci-neuro",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

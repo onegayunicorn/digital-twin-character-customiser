@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "PIXELATED-Pty-ltd",
+    "name": "MoodChromaPublic",
+    "url": "https://github.com/PIXELATED-Pty-ltd/MoodChromaPublic"
+  },
+  "domain": "misc",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

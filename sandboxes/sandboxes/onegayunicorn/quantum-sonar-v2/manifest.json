@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "quantum_sonar_v2",
+    "url": "https://github.com/onegayunicorn/quantum_sonar_v2"
+  },
+  "domain": "quantum",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

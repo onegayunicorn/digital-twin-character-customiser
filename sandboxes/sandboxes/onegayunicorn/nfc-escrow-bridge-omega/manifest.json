@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "nfc-escrow-bridge-omega",
+    "url": "https://github.com/onegayunicorn/nfc-escrow-bridge-omega"
+  },
+  "domain": "sovereign",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

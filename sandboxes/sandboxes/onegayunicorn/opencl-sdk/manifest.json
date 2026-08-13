@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "opencl-sdk",
+    "url": "https://github.com/onegayunicorn/opencl-sdk"
+  },
+  "domain": "hardware-drivers",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

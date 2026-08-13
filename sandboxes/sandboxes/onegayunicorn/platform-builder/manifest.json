@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "Platform_Builder",
+    "url": "https://github.com/onegayunicorn/Platform_Builder"
+  },
+  "domain": "dashboard-ui",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

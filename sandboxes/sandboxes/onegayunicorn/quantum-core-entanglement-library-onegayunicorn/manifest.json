@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "quantum-core-entanglement-library-onegayunicorn",
+    "url": "https://github.com/onegayunicorn/quantum-core-entanglement-library-onegayunicorn"
+  },
+  "domain": "quantum",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

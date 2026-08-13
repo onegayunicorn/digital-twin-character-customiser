@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "tele-quantum-os-deployment",
+    "url": "https://github.com/onegayunicorn/tele-quantum-os-deployment"
+  },
+  "domain": "quantum",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

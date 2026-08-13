@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "app-builder-packager-nexus",
+    "url": "https://github.com/onegayunicorn/app-builder-packager-nexus"
+  },
+  "domain": "dashboard-ui",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

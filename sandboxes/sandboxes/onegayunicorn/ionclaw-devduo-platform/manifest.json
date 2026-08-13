@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "ionclaw-devduo-platform",
+    "url": "https://github.com/onegayunicorn/ionclaw-devduo-platform"
+  },
+  "domain": "misc",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "Genesis-Cure-Foundation",
+    "url": "https://github.com/onegayunicorn/Genesis-Cure-Foundation"
+  },
+  "domain": "genesis-cure",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

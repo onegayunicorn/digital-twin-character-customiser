@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "plant-identifier",
+    "url": "https://github.com/onegayunicorn/plant-identifier"
+  },
+  "domain": "misc",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "universal_driver_dashboard-",
+    "url": "https://github.com/onegayunicorn/universal_driver_dashboard-"
+  },
+  "domain": "dashboard-ui",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

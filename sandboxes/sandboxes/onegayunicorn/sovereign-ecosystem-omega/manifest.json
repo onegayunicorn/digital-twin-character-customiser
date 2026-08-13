@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "sovereign-ecosystem-omega",
+    "url": "https://github.com/onegayunicorn/sovereign-ecosystem-omega"
+  },
+  "domain": "sovereign",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

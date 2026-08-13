@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "tele-repo",
+    "url": "https://github.com/onegayunicorn/tele-repo"
+  },
+  "domain": "teleos-os",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

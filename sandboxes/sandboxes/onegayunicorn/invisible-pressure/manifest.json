@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "invisible-pressure-",
+    "url": "https://github.com/onegayunicorn/invisible-pressure-"
+  },
+  "domain": "misc",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

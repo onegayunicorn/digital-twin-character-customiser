@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "Sovereign-Intelligence",
+    "url": "https://github.com/onegayunicorn/Sovereign-Intelligence"
+  },
+  "domain": "sovereign",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

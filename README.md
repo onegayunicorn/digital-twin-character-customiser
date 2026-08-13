@@ -36,6 +36,7 @@ A complete, platform-first build package covering:
 
 ```
 ├── apps/                     # Multi-platform frontends
+│   ├── commerce-portal/      #   Sovereign Commerce portal + payments kiosk
 │   ├── web/                  #   IPP portal console (Vite scaffold) + dashboard
 ├── cpp/                      # Compiled native modules
 │   └── mutation_kernel/      #   C++ stop-codon/frameshift analysis kernel (g++ build)
@@ -56,6 +57,7 @@ A complete, platform-first build package covering:
 │   ├── medagents/            #   Healthcare agency agents: hospital triage, doctor case review, researcher match (decision-support only)
 │   ├── sonar-5d/             #   Crystal-mesh geometry + 5D sonar sweep (OBJ export)
 │   ├── bridge/               #   Software bridge: capability routing registry + handshake
+│   ├── sovereign-commerce/   #   Commerce kernel: 14 domains, compliance OS, jurisdiction, ledger, procurement, NFC escrow, off-grid
 │   ├── ai-chat/              #   LLM chat module (AI Gateway + Vectorize RAG)
 │   ├── ar-vr/                #   WebXR scenes, sphere visualization
 │   └── api/                  #   Cloudflare Workers API (REST/WebSocket)

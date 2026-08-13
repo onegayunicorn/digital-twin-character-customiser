@@ -142,6 +142,51 @@ EXTENSIONS = [
      "PipelineSubmittedTrigger",
      "ExecutePipelineTask | GateDependenciesTask",
      "Validate -> Enqueue steps -> Dispatch -> Audit -> Report"),
+    (154, "Sovereign Kernel",
+     "Twelve shared primitives (identity, trust, policy, permissions, ledger, events, payments, contracts, compliance, audit, ai-agents, interoperability) used by every vertical.",
+     "PrimitiveAttachedTrigger",
+     "RegisterPrimitiveTask | AttachPrimitiveTask",
+     "Register -> Attach -> Health check -> Report"),
+    (155, "Jurisdiction Engine",
+     "Six-dimension jurisdiction classification (user/entity/transaction/asset/service/data) -> regulatory profile -> policy check.",
+     "TransactionSubmittedTrigger",
+     "ClassifyJurisdictionTask | ResolveProfileTask",
+     "Classify -> Profile -> Check -> Warn -> Report"),
+    (156, "Compliance OS",
+     "Regulatory capability gates (jurisdiction -> classification -> registration -> AML -> KYC -> monitoring -> travel rule -> sanctions -> records -> evaluation -> ENABLE/BLOCK) with evidence log.",
+     "FeatureEnableRequestTrigger",
+     "RunGateChainTask | LogComplianceEvidenceTask",
+     "Gate chain -> Evidence -> Allow/Block -> Audit"),
+    (157, "Ledger & Payments",
+     "Double-entry ledger, conditional settlement (escrow hold/release/refund), Stripe-style payment orchestration (test-mode).",
+     "PaymentInitiatedTrigger | EscrowEventTrigger",
+     "PostLedgerEntryTask | RunPaymentFlowTask | HoldEscrowTask",
+     "Gate -> Intent -> Hold -> Capture -> Release -> Reconcile"),
+    (158, "Procurement Engine",
+     "RFQ/RFP/tender, bid evaluation (value-for-money), three-way matching (PO/GRN/invoice) with rules engine.",
+     "TenderOpenedTrigger | InvoiceSubmittedTrigger",
+     "EvaluateBidsTask | ThreeWayMatchTask",
+     "Tender -> Bids -> Evaluate -> PO -> GRN -> Invoice -> Match -> Pay"),
+    (159, "Off-grid Sync",
+     "Offline transaction queue, store-and-forward, local ledger, eventual-consistency merge, disaster mode.",
+     "OfflineTransactionTrigger | SyncOpportunityTrigger",
+     "EnqueueOfflineTask | MergeLedgerTask | EnterDisasterModeTask",
+     "Queue -> Sync -> Merge -> Reconcile -> Report"),
+    (160, "Entity Registry",
+     "Legal entity registry (person..DAO), beneficial ownership, governance requirements per entity type.",
+     "EntityRegisteredTrigger",
+     "RegisterEntityTask | AddBeneficialOwnerTask",
+     "Register -> Verify type -> Ownership -> Governance -> Report"),
+    (161, "Supply Chain Provenance",
+     "SKU registry, serialisation, batch tracking, chain-of-custody with hash chaining.",
+     "UnitSerialisedTrigger | CustodyEventTrigger",
+     "SerialiseUnitTask | AppendCustodyEventTask",
+     "Register SKU -> Serialise -> Track -> Verify chain -> Report"),
+    (162, "NFC Escrow",
+     "NFC-tap conditional settlement bridge: tap -> hold -> verify condition -> release/refund (nfc-escrow-bridge integration).",
+     "NfcTapTrigger | ConditionVerifiedTrigger",
+     "TapHoldTask | ReleaseOrRefundTask",
+     "Tap -> Hold -> Verify -> Release/Refund -> Audit"),
 ]
 
 ACCESS_LEVELS = ["read", "write", "admin"]
@@ -494,7 +539,7 @@ def main():
         print(f"[DRY-RUN] would generate {len(ENTRIES)} capabilities x 4 artifact types "
               f"+ {len(EXTENSIONS)} extensions x 4")
         assert len(ENTRIES) == 131, f"expected 131 entries, got {len(ENTRIES)}"
-        assert len(EXTENSIONS) == 22, f"expected 22 extensions, got {len(EXTENSIONS)}"
+        assert len(EXTENSIONS) == 31, f"expected 31 extensions, got {len(EXTENSIONS)}"
         return
 
     counts, index_rows = generate_set(ENTRIES, PLATFORM)

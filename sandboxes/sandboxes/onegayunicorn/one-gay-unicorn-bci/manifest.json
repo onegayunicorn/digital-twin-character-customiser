@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "one-gay-unicorn-bci",
+    "url": "https://github.com/onegayunicorn/one-gay-unicorn-bci"
+  },
+  "domain": "bci-neuro",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

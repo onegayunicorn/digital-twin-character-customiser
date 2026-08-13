@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "Aether-Omni",
+    "url": "https://github.com/onegayunicorn/Aether-Omni"
+  },
+  "domain": "sovereign",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

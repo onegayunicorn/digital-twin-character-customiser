@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "Joystick-Stick-Drift-Corrector",
+    "url": "https://github.com/onegayunicorn/Joystick-Stick-Drift-Corrector"
+  },
+  "domain": "misc",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

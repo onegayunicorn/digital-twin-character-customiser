@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "deepseek-v4-sovereign",
+    "url": "https://github.com/onegayunicorn/deepseek-v4-sovereign"
+  },
+  "domain": "sovereign",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

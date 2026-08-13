@@ -38,6 +38,32 @@ buckets:
     lifecycle: write-once-read-many, immutable object lock
     access: private, audit-gated
 
+  # --- Sovereign Commerce buckets (2026-08-13) ---
+  - name: dev-cp-payments
+    purpose: Payment records, invoices, receipts, settlement files (Stripe reconciliation)
+    lifecycle: 7-year retention (tax/AML record keeping)
+    access: private, Workers + compliance-OS only
+
+  - name: dev-cp-escrow
+    purpose: Escrow holds/releases, NFC-tap event logs (conditional settlement evidence)
+    lifecycle: 7-year retention, append-only
+    access: private, audit-gated
+
+  - name: dev-cp-identity
+    purpose: DID documents, KYC/CDD evidence, verifiable credentials, attestations
+    lifecycle: subject-controlled retention; consent-based deletion
+    access: private, client-side encrypted (PII)
+
+  - name: dev-cp-procurement
+    purpose: Tenders, bids, POs, GRNs, invoices (three-way matching evidence)
+    lifecycle: 7-year retention (procurement audit trail)
+    access: private; government tenants get per-tenant scoping
+
+  - name: dev-cp-kiosk
+    purpose: Kiosk session data, payment-link payloads, QR codes, receipts for consumers
+    lifecycle: 90-day hot; receipts archived to payments bucket
+    access: public CDN for payment links; session data private
+
 # Cross-cutting rules
 rules:
   encryption: SSE default (R2), client-side for PII (VR memories, health data)

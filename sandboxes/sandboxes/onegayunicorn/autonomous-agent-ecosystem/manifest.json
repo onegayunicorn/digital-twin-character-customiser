@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "autonomous-agent-ecosystem",
+    "url": "https://github.com/onegayunicorn/autonomous-agent-ecosystem"
+  },
+  "domain": "orchestrator-agent",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

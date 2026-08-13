@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Payments Kiosk — Sovereign Commerce</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0A0A10; color: #E6E6F0; font-family: Inter, system-ui, sans-serif; padding: 28px; }
+  h1 { font-size: 18px; } .sub { color: #8A8AA0; font-size: 12.5px; margin: 6px 0 18px; }
+  .panel { background:#12121C; border:1px solid #23233A; border-radius:12px; padding:20px; max-width:520px; }
+  .row { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #1E1E30; font-size:14px; }
+  .row.total { font-weight:700; border-bottom:none; font-size:16px; }
+  button { margin-top:16px; width:100%; padding:14px; border-radius:10px; border:none; background:#7C7CE8; color:#0A0A10; font-weight:700; font-size:15px; cursor:pointer; }
+  button:disabled { opacity:.4; cursor:not-allowed; }
+  .step { color:#8A8AA0; font-size:12px; margin-top:10px; min-height:18px; }
+  .badge { display:inline-block; border-radius:999px; padding:3px 12px; font-size:11px; margin-top:8px; }
+  .ok { background:#12331F; color:#4ADE80; border:1px solid #1E5B33; }
+  .block { background:#3A1220; color:#F87171; border:1px solid #6B1E33; }
+</style>
+</head>
+<body>
+<h1>💳 Payments Kiosk</h1>
+<div class="sub mono">demo checkout · escrow settlement · regulatory gate preview</div>
+
+<div class="panel">
+  <div class="row"><span>Quantum Sphere Mode — license</span><span>A$ 99.00</span></div>
+  <div class="row"><span>VAT/GST (10%)</span><span>A$ 9.90</span></div>
+  <div class="row total"><span>Total</span><span>A$ 108.90</span></div>
+  <button id="pay">Pay with escrow (NFC-tap flow)</button>
+  <div class="step mono" id="step">idle — ready when the commerce API is running</div>
+  <div id="verdict"></div>
+</div>
+
+<script>
+const payBtn = document.getElementById('pay');
+const stepEl = document.getElementById('step');
+const verdictEl = document.getElementById('verdict');
+
+async function main() {
+  stepEl.textContent = 'contacting sovereign-commerce API at :8788 …';
+  try {
+    const h = await fetch('http://127.0.0.1:8788/health').then(r => r.json());
+    stepEl.textContent = 'kernel online: ' + h.kernel_primitives + ' primitives · ledger balanced: ' + h.ledger_balanced;
+    payBtn.disabled = false;
+  } catch (e) {
+    stepEl.textContent = 'API offline — run: python3 -m sovereign_commerce --mode serve --port 8788';
+    return;
+  }
+  payBtn.onclick = async () => {
+    stepEl.textContent = 'running regulatory gate chain (AU · VASP classification) …';
+    const g = await fetch('http://127.0.0.1:8788/compliance', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({feature: 'payments', jurisdiction: 'AU', classification: 'payments'})
+    }).then(r => r.json());
+    if (g.final === 'BLOCK') {
+      stepEl.textContent = 'gate BLOCKED — missing: ' + g.failed.join(', ');
+      verdictEl.innerHTML = '<span class="badge block">BLOCKED by compliance gates</span>';
+      return;
+    }
+    stepEl.textContent = 'gate ENABLE — escrow hold → capture → release …';
+    setTimeout(() => {
+      stepEl.textContent = 'settled ✓ (test-mode) — see ledger: python3 -m sovereign_commerce --mode pay';
+      verdictEl.innerHTML = '<span class="badge ok">SETTLED — escrow released</span>';
+    }, 900);
+  };
+}
+main();
+</script>
+</body>
+</html>

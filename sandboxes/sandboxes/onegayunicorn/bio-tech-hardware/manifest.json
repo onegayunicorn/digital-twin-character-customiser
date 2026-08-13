@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "BIO-TECH-HARDWARE-",
+    "url": "https://github.com/onegayunicorn/BIO-TECH-HARDWARE-"
+  },
+  "domain": "hardware-drivers",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

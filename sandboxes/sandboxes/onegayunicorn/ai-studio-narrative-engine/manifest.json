@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "AI_STUDIO_NARRATIVE_ENGINE",
+    "url": "https://github.com/onegayunicorn/AI_STUDIO_NARRATIVE_ENGINE"
+  },
+  "domain": "ai-chat-llm",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

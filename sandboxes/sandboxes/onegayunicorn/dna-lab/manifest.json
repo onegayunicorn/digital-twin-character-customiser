@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "dna-lab",
+    "url": "https://github.com/onegayunicorn/dna-lab"
+  },
+  "domain": "genesis-cure",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

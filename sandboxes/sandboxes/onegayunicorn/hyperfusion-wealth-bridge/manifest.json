@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "Hyperfusion-Wealth-Bridge",
+    "url": "https://github.com/onegayunicorn/Hyperfusion-Wealth-Bridge"
+  },
+  "domain": "mesh-network",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

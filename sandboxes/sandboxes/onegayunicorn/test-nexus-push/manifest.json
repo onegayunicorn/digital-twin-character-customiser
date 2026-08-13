@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "test-nexus-push",
+    "url": "https://github.com/onegayunicorn/test-nexus-push"
+  },
+  "domain": "ai-chat-llm",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

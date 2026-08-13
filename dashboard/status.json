@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-12T21:47:25.743936",
+  "generated_at": "2026-08-13T14:13:56.307460",
   "platform": {
     "spec": {
       "protocols": 131,
@@ -43,6 +43,7 @@
     "sensor",
     "sonar-5d",
     "sovereign",
+    "sovereign-commerce",
     "theory-sim"
   ],
   "agents": [

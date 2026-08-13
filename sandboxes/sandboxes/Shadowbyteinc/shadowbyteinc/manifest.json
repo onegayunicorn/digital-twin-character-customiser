@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "Shadowbyteinc",
+    "name": "Shadowbyteinc",
+    "url": "https://github.com/Shadowbyteinc/Shadowbyteinc"
+  },
+  "domain": "misc",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

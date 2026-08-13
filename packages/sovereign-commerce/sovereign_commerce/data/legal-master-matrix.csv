@@ -1,0 +1,31 @@
+domain,software,legal_regulatory
+consumer,Wallet/commerce,Consumer law
+merchant,POS/payments,Consumer + tax
+banking,Transfers,Financial regulation
+cards,Card processing,Payment/card rules
+remittance,FX/transfers,AML/CTF + licensing
+digital-assets,Wallet/exchange,AML/CTF + financial regulation
+defi,Protocols,Product-specific regulation
+procurement,Tender/RFP,Procurement law
+government,Agency portal,Government frameworks
+identity,DID/KYC,Privacy/identity
+biometrics,Device identity,Privacy
+blockchain,Nodes/contracts,Digital-asset regulation
+smart-contracts,Contract engine,Contract law
+data,Data platform,Privacy/records
+ai,Agent platform,AI/security/privacy
+off-grid,Edge platform,Sector-specific law
+energy,Microgrid,Energy/electrical law
+supply-chain,Provenance,Trade/customs/product law
+employment,Workforce,Employment law
+tax,Tax engine,ATO/tax law
+international,FX/import/export,Cross-border regulation
+security,SOC/IAM,Cyber/privacy
+government-procurement,Tender engine,CPR/PGPA
+corporate,Entity management,Corporations law
+non-profit,Governance,Charities/non-profit law
+insurance,Risk platform,Insurance regulation
+real-estate,Asset marketplace,Property/AML
+healthcare,Health platform,Health/privacy regulation
+education,Credential system,Education/privacy
+emergency,Disaster mode,Emergency/public-sector requirements

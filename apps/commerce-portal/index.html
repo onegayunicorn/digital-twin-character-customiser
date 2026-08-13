@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sovereign Commerce Platform — Portal</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0A0A10; color: #E6E6F0; font-family: Inter, system-ui, sans-serif; padding: 28px; }
+  h1 { font-size: 20px; margin-bottom: 4px; }
+  .sub { color: #8A8AA0; font-size: 12.5px; margin-bottom: 22px; }
+  h2 { color: #7C7CE8; font-size: 13px; text-transform: uppercase; letter-spacing: .12em; margin: 24px 0 10px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+  a.card { display: block; background: #12121C; border: 1px solid #23233A; border-radius: 10px; padding: 16px; text-decoration: none; color: inherit; }
+  a.card:hover { border-color: #7C7CE8; }
+  .card small { color: #8A8AA0; }
+  .mono { font-family: "JetBrains Mono", monospace; }
+  pre { background:#12121C; padding:14px; border-radius:10px; border:1px solid #23233A; line-height:1.7; font-size:12px; margin-top:8px; }
+  .badge { display:inline-block; background:#1A1A2E; border:1px solid #2A2A4A; border-radius:999px; padding:2px 10px; font-size:11px; margin:2px 4px 2px 0; }
+</style>
+</head>
+<body>
+<h1>🛡 Sovereign Commerce Platform</h1>
+<div class="sub mono">regulated financial + commerce + identity + infrastructure platform · architecture map implemented as working code · not legal advice</div>
+
+<h2>Domains (14)</h2>
+<div>
+  <span class="badge">consumer</span><span class="badge">merchant</span><span class="badge">procurement</span>
+  <span class="badge">government</span><span class="badge">financial</span><span class="badge">blockchain</span>
+  <span class="badge">defi</span><span class="badge">identity</span><span class="badge">offgrid</span>
+  <span class="badge">energy</span><span class="badge">supplychain</span><span class="badge">entities</span>
+  <span class="badge">security</span><span class="badge">compliance-os</span>
+</div>
+
+<h2>Console</h2>
+<div class="grid">
+  <a class="card" href="kiosk.html"><strong>Payments Kiosk</strong><br><small>checkout · escrow · NFC-tap demo</small></a>
+  <a class="card" href="../../dashboard/index.html"><strong>Platform Dashboard</strong><br><small>sims, claims register, spec status</small></a>
+  <a class="card" href="../../docs/business/stripe-setup.md"><strong>Stripe Setup</strong><br><small>account t.j.power1986@gmail.com · integration</small></a>
+  <a class="card" href="../../packages/sovereign-commerce/sovereign_commerce/data/legal-master-matrix.csv"><strong>Legal Master Matrix</strong><br><small>30 domains → legal/regulatory map</small></a>
+  <a class="card" href="../../docs/repo-inventory.md"><strong>Repo Inventory</strong><br><small>420 repos · connectivity</small></a>
+</div>
+
+<h2>API & CLI quickstart</h2>
+<pre class="mono">python3 -m sovereign_commerce --mode serve --port 8788     # HTTP API
+python3 -m sovereign_commerce --mode gate --feature digital-asset-exchange \
+  --context '{"classification":"VASP","registered":true,"aml_program":true,"kyc":true,"transaction_monitoring":true,"sanctions_ok":true,"record_keeping":true,"jurisdiction":"AU"}'
+python3 -m sovereign_commerce --mode pay --payer buyer --payee seller --amount 100
+python3 -m sovereign_commerce --mode proc
+python3 -m sovereign_commerce --mode offgrid --node edge-1</pre>
+
+<p class="mono" style="color:#56567A;font-size:11px;margin-top:14px">
+Sovereign Kernel: identity · trust · policy · permissions · ledger · events · payments · contracts · compliance · audit · ai-agents · interoperability — every vertical uses the same primitives.</p>
+</body>
+</html>

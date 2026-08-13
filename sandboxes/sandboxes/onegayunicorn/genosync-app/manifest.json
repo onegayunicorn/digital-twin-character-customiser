@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "owner": "onegayunicorn",
+    "name": "-GenoSync-App",
+    "url": "https://github.com/onegayunicorn/-GenoSync-App"
+  },
+  "domain": "genesis-cure",
+  "status": "sandboxed",
+  "generated_by": "repo-agent",
+  "sim_stub": "sim_stub.py"
+}

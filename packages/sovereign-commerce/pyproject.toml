@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sovereign-commerce"
+version = "0.1.0"
+description = "Sovereign Commerce Platform kernel: 14 domains, compliance OS, jurisdiction engine, ledger, procurement, off-grid, NFC escrow, digital twins"
+requires-python = ">=3.10"
+dependencies = ["sovereign-orchestrator>=0.1", "ipp-digital-twin>=0.1"]
+
+[tool.setuptools.packages.find]
+include = ["sovereign_commerce*"]
