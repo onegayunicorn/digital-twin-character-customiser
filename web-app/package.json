@@ -1,0 +1,45 @@
+{
+  "name": "web-app",
+  "version": "4.1.0",
+  "private": true,
+  "description": "Digital Twin Character Customizer — React 19 + Vite + R3F + Tailwind v4 frontend",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@dt-core/agent-matrix": "4.1.0",
+    "@dt-core/ai-router": "4.1.0",
+    "@dt-core/simulation": "4.1.0",
+    "@dt-core/state": "4.1.0",
+    "@dt-core/types": "4.1.0",
+    "@dt-engine/evolution": "4.1.0",
+    "@dt-engine/feature-grid": "4.1.0",
+    "@dt-engine/gltf-registry": "4.1.0",
+    "@dt-engine/lifestyle": "4.1.0",
+    "@dt-engine/mesh-pipeline": "4.1.0",
+    "@dt-engine/telemetry": "4.1.0",
+    "@react-three/drei": "^10.0.0",
+    "@react-three/fiber": "^9.0.0",
+    "lucide-react": "^0.469.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "three": "^0.169.0",
+    "wouter": "^3.3.5",
+    "zustand": "^5.0.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.169.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7",
+    "vitest": "^2.1.8"
+  }
+}

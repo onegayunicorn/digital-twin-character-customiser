@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Quantum Reality Interface — Dashboard (SIMULATION)</title>
+<style>
+  :root { --bg:#0a0f1c; --card:#101830; --line:#1e2a44; --text:#cbd5e1; --muted:#64748b; --accent:#2d7eb5; --accent2:#c85a3a; --ok:#059669; --warn:#b45309; }
+  * { box-sizing:border-box; margin:0; padding:0; font-family:"IBM Plex Sans",system-ui,sans-serif; }
+  body { background:radial-gradient(1000px 500px at 20% -10%, rgba(45,126,181,.12), transparent 60%), var(--bg); color:var(--text); min-height:100vh; padding:20px; }
+  .wrap { max-width:1400px; margin:0 auto; }
+  header { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:16px; }
+  h1 { font-size:26px; font-weight:700; }
+  h1 span { background:linear-gradient(100deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .pill { display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:20px; font-size:11px; font-weight:600; letter-spacing:.04em; }
+  .pill.idle { background:rgba(100,116,139,.14); color:var(--muted); }
+  .pill.warn { background:rgba(220,38,38,.12); color:#f87171; border:1px solid rgba(220,38,38,.3); }
+  .notice { background:linear-gradient(90deg, rgba(220,38,38,.07), rgba(200,90,58,.05)); border:1px solid rgba(220,38,38,.22); border-left:3px solid #dc2626; border-radius:8px; padding:10px 14px; font-size:12px; margin-bottom:16px; }
+  .grid { display:grid; grid-template-columns:1fr 360px; gap:16px; }
+  @media (max-width:1000px){ .grid{ grid-template-columns:1fr; } }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; }
+  .card h2 { font-size:14px; font-weight:600; margin-bottom:12px; }
+  canvas { width:100%; display:block; border-radius:10px; background:linear-gradient(180deg,#0a0f1c,#0d1525); }
+  .metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:12px 0; }
+  @media (max-width:800px){ .metrics{ grid-template-columns:repeat(2,1fr); } }
+  .metric .label { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:4px; }
+  .metric .value { font-size:22px; font-weight:700; font-variant-numeric:tabular-nums; }
+  .bar { height:4px; background:rgba(45,126,181,.15); border-radius:2px; margin-top:6px; overflow:hidden; }
+  .bar i { display:block; height:100%; background:var(--accent); transition:width .3s; }
+  .log { font-family:ui-monospace,monospace; font-size:11px; max-height:220px; overflow-y:auto; }
+  .log div { padding:3px 6px; border-bottom:1px solid var(--line); color:var(--muted); }
+  .log .good { color:var(--ok); } .log .warn { color:var(--warn); } .log .crit { color:#f87171; font-weight:600; }
+  .watermark { position:absolute; right:12px; bottom:8px; font-size:10px; color:rgba(148,163,184,.35); font-weight:600; letter-spacing:.08em; }
+  .rel { position:relative; }
+  .hud { position:absolute; left:10px; top:10px; font-family:ui-monospace,monospace; font-size:11px; color:#cbd5e1; background:rgba(10,15,28,.8); border:1px solid rgba(45,126,181,.3); border-radius:6px; padding:8px 10px; line-height:1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.18em;font-weight:600;">Theoretical Physics Simulation Platform</div>
+      <h1>Quantum Reality Interface <span>v2.0</span></h1>
+      <div style="font-size:13px;color:var(--muted);margin-top:4px;">Photonic Entanglement + GHz Molecular Oscillation — Computational Model</div>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <span class="pill warn">⚠ SIMULATION ONLY</span>
+    </div>
+  </header>
+  <div class="notice"><strong style="color:#f87171;">Scientific Notice:</strong> "Portal formation" is a model-internal metric, <strong>not</strong> an experimentally-verified physical phenomenon. All outputs are mathematical predictions within this framework.</div>
+
+  <div class="grid">
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card rel">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <h2 style="margin:0;">Reaction Chamber Visualization</h2>
+          <span id="phaseLabel" class="pill idle">Phase: —</span>
+        </div>
+        <canvas id="simCanvas" width="900" height="420"></canvas>
+        <div class="hud" id="hud"></div>
+        <div class="watermark">SIMULATION</div>
+      </div>
+
+      <div class="metrics">
+        <div class="card metric"><div class="label">Entanglement Fidelity</div><div class="value" id="mFidelity" style="color:var(--accent);">0.00</div><div class="bar"><i id="bFidelity"></i></div></div>
+        <div class="card metric"><div class="label">Molecular Coherence</div><div class="value" id="mCoherence" style="color:var(--ok);">0.00</div><div class="bar"><i id="bCoherence" style="background:var(--ok);"></i></div></div>
+        <div class="card metric"><div class="label">Decoherence Rate</div><div class="value" id="mDecoherence" style="color:var(--accent2);">0.00</div></div>
+        <div class="card metric"><div class="label">Portal Metric P</div><div class="value" id="mPortal" style="color:var(--accent);">0.000</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">Threshold <strong>1.000</strong></div></div>
+      </div>
+
+      <div class="card">
+        <h2>Telemetry — State Evolution</h2>
+        <canvas id="chartTelemetry" height="180"></canvas>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card">
+        <h2>Protocol Event Log</h2>
+        <div class="log" id="log"></div>
+      </div>
+      <div class="card">
+        <h2>Controls</h2>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:12px;">
+          <button onclick="play()" style="background:var(--accent);color:#fff;border:0;border-radius:8px;padding:10px;font-weight:600;cursor:pointer;">▶ Play Protocol</button>
+          <button onclick="location.reload()" style="background:transparent;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:10px;cursor:pointer;">↻ Reset</button>
+          <div style="color:var(--muted);font-size:11px;line-height:1.5;">5-phase SOP: Seeding (0–10ns) → Field (10–30ns) → Amplification (30–70ns) → Interface (70–90ns) → Observation (90–100ns). Safety: energy &lt; 1 J, auto-shutdown at P &gt; 1.5.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const TELEMETRY = [{"tNs":0,"phase":"ENTANGLEMENT SEEDING","fidelity":0,"concurrence":0,"entropy":0,"coherence":1,"fieldMVm":0,"energyJ":0,"decoherenceRate":1.01,"portalMetric":0,"dissociatedPct":0},{"tNs":1,"phase":"ENTANGLEMENT SEEDING","fidelity":0.095,"concurrence":0,"entropy":0.4529425481872832,"coherence":1,"fieldMVm":0,"energyJ":0,"decoherenceRate":0.9625,"portalMetric":0,"dissociatedPct":0},{"tNs":2,"phase":"ENTANGLEMENT SEEDING","fidelity":0.19,"concurrence":0,"entropy":0.7014714598838974,"coherence":1,"fieldMVm":0,"energyJ":0,"decoherenceRate":0.915,"portalMetric":0,"dissociatedPct":0},{"tNs":3,"phase":"ENTANGLEMENT SEEDING","fidelity":0.285,"concurrence":0,"entropy":0.8621745299412247,"coherence":1,"fieldMVm":0,"energyJ":0,"decoherenceRate":0.8675,"portalMetric":0,"dissociatedPct":0},{"tNs":4,"phase":"ENTANGLEMENT SEEDING","fidelity":0.38,"concurrence":0,"entropy":0.9580420222262995,"coherence":1,"fieldMVm":0,"energyJ":0,"decoherenceRate":0.8200000000000001,"portalMetric":0,"dissociatedPct":0},{"tNs":5,"phase":"ENTANGLEMENT SEEDING","fidelity":0.475,"concurrence":0,"entropy":0.99819587904281,"coherence":1,"fieldMVm":0,"energyJ":0,"decoherenceRate":0.7725,"portalMetric":0,"dissociatedPct":0},{"tNs":6,"phase":"ENTANGLEMENT SEEDING","fidelity":0.57,"concurrence":0.1399999999999999,"entropy":0.9858150371789198,"coherence":1,"fieldMVm":0,"energyJ":0,"decoherenceRate":0.7250000000000001,"portalMetric":0,"dissociatedPct":0},{"tNs":7,"phase":"ENTANGLEMENT SEEDING","fidelity":0.6649999999999999,"concurrence":0.32999999999999985,"entropy":0.9199534913630799,"coherence":1,"fieldMVm":0,"energyJ":0,"decoherenceRate":0.6775,"portalMetric":0,"dissociatedPct":0},{"tNs":8,"phase":"ENTANGLEMENT SEEDING","fidelity":0.76,"concurrence":0.52,"entropy":0.7950402793845223,"coherence":1,"fieldMVm":0,"energyJ":0,"decoherenceRate":0.63,"portalMetric":0,"dissociatedPct":0},{"tNs":9,"phase":"ENTANGLEMENT SEEDING","fidelity":0.855,"concurrence":0.71,"entropy":0.5971850452537841,"coherence":1,"fieldMVm":0,"energyJ":0,"decoherenceRate":0.5825,"portalMetric":0,"dissociatedPct":0},{"tNs":10,"phase":"GHz FIELD ACTIVATION","fidelity":0.95,"concurrence":0.8999999999999999,"entropy":0.2863969571159563,"coherence":1,"fieldMVm":0,"energyJ":0,"decoherenceRate":0.535,"portalMetric":0,"dissociatedPct":0},{"tNs":11,"phase":"GHz FIELD ACTIVATION","fidelity":0.94883,"concurrence":0.8976599999999999,"entropy":0.29134639566871184,"coherence":1,"fieldMVm":0.25,"energyJ":2.7669336875e-13,"decoherenceRate":0.545585,"portalMetric":0.08695528652730555,"dissociatedPct":0},{"tNs":12,"phase":"GHz FIELD ACTIVATION","fidelity":0.94766,"concurrence":0.8953199999999999,"entropy":0.29625515446399625,"coherence":1,"fieldMVm":0.5,"energyJ":1.106773475e-12,"decoherenceRate":0.55617,"portalMetric":0.17039034827480806,"dissociatedPct":0},{"tNs":13,"phase":"GHz FIELD ACTIVATION","fidelity":0.9464899999999999,"concurrence":0.8929799999999999,"entropy":0.30112409389872047,"coherence":1,"fieldMVm":0.75,"energyJ":2.4902403187499997e-12,"decoherenceRate":0.5667550000000001,"portalMetric":0.250502421681326,"dissociatedPct":0},{"tNs":14,"phase":"GHz FIELD ACTIVATION","fidelity":0.9453199999999999,"concurrence":0.8906399999999999,"entropy":0.30595403661655635,"coherence":1,"fieldMVm":1,"energyJ":4.4270939e-12,"decoherenceRate":0.5773400000000001,"portalMetric":0.32747427858800704,"dissociatedPct":0},{"tNs":15,"phase":"GHz FIELD ACTIVATION","fidelity":0.9441499999999999,"concurrence":0.8882999999999999,"entropy":0.31074576993171343,"coherence":1,"fieldMVm":1.25,"energyJ":6.91733421875e-12,"decoherenceRate":0.587925,"portalMetric":0.4014755283411999,"dissociatedPct":0},{"tNs":16,"phase":"GHz FIELD ACTIVATION","fidelity":0.9429799999999999,"concurrence":0.8859599999999999,"entropy":0.31550004804953324,"coherence":1,"fieldMVm":1.5,"energyJ":9.960961274999999e-12,"decoherenceRate":0.5985100000000001,"portalMetric":0.47266378172461604,"dissociatedPct":0},{"tNs":17,"phase":"GHz FIELD ACTIVATION","fidelity":0.9418099999999999,"concurrence":0.8836199999999999,"entropy":0.3202175941047566,"coherence":1,"fieldMVm":1.75,"energyJ":1.3557975068749999e-11,"decoherenceRate":0.609095,"portalMetric":0.541185693528924,"dissociatedPct":0},{"tNs":18,"phase":"GHz FIELD ACTIVATION","fidelity":0.9406399999999999,"concurrence":0.8812799999999998,"entropy":0.3248991020358003,"coherence":0.998,"fieldMVm":2,"energyJ":1.77083756e-11,"decoherenceRate":0.61968,"portalMetric":0.6059635424735347,"dissociatedPct":0.2},{"tNs":19,"phase":"GHz FIELD ACTIVATION","fidelity":0.9394699999999999,"concurrence":0.8789399999999998,"entropy":0.3295452383112135,"coherence":0.997,"fieldMVm":2.25,"energyJ":2.2412162868749993e-11,"decoherenceRate":0.630265,"portalMetric":0.6687555480631163,"dissociatedPct":0.3},{"tNs":20,"phase":"GHz FIELD ACTIVATION","fidelity":0.9382999999999999,"concurrence":0.8765999999999998,"entropy":0.33415664352260294,"coherence":0.996,"fieldMVm":2.5,"energyJ":2.7669336875e-11,"decoherenceRate":0.64085,"portalMetric":0.7291462900834828,"dissociatedPct":0.4},{"tNs":21,"phase":"GHz FIELD ACTIVATION","fidelity":0.9371299999999999,"concurrence":0.8742599999999998,"entropy":0.3387339338566948,"coherence":0.995,"fieldMVm":2.75,"energyJ":3.347989761875e-11,"decoherenceRate":0.6514350000000001,"portalMetric":0.7872533598900887,"dissociatedPct":0.5},{"tNs":22,"phase":"GHz FIELD ACTIVATION","fidelity":0.9359599999999999,"concurrence":0.8719199999999998,"entropy":0.3432777024577817,"coherence":0.993,"fieldMVm":3,"energyJ":3.9843845099999995e-11,"decoherenceRate":0.66202,"portalMetric":0.8423385517053863,"dissociatedPct":0.7000000000000001},{"tNs":23,"phase":"GHz FIELD ACTIVATION","fidelity":0.93479,"concurrence":0.86958,"entropy":0.34778852069057253,"coherence":0.993,"fieldMVm":3.25,"energyJ":4.6761179318749995e-11,"decoherenceRate":0.672605,"portalMetric":0.8970498368284506,"dissociatedPct":0.7000000000000001},{"tNs":24,"phase":"GHz FIELD ACTIVATION","fidelity":0.93362,"concurrence":0.86724,"entropy":0.3522669393123844,"coherence":0.99,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.6831900000000001,"portalMetric":0.9470259517850084,"dissociatedPct":1},{"tNs":25,"phase":"GHz FIELD ACTIVATION","fidelity":0.93245,"concurrence":0.8649,"entropy":0.35671348956266324,"coherence":0.986,"fieldMVm":3.75,"energyJ":6.225600796874999e-11,"decoherenceRate":0.693775,"portalMetric":0.9939054808835718,"dissociatedPct":1.4000000000000001},{"tNs":26,"phase":"GHz FIELD ACTIVATION","fidelity":0.93128,"concurrence":0.86256,"entropy":0.36112868417700306,"coherence":0.986,"fieldMVm":4,"energyJ":7.08335024e-11,"decoherenceRate":0.70436,"portalMetric":1.0429235958884662,"dissociatedPct":1.4000000000000001},{"tNs":27,"phase":"GHz FIELD ACTIVATION","fidelity":0.93011,"concurrence":0.86022,"entropy":0.3655130183320869,"coherence":0.982,"fieldMVm":4.25,"energyJ":7.996438356875e-11,"decoherenceRate":0.714945,"portalMetric":1.0859056528823894,"dissociatedPct":1.7999999999999998},{"tNs":28,"phase":"GHz FIELD ACTIVATION","fidelity":0.92894,"concurrence":0.85788,"entropy":0.36986697052733525,"coherence":0.981,"fieldMVm":4.5,"energyJ":8.964865147499997e-11,"decoherenceRate":0.7255300000000001,"portalMetric":1.1304303419569142,"dissociatedPct":1.9},{"tNs":29,"phase":"GHz FIELD ACTIVATION","fidelity":0.92777,"concurrence":0.85554,"entropy":0.3741910034084742,"coherence":0.978,"fieldMVm":4.75,"energyJ":9.988630611874999e-11,"decoherenceRate":0.7361150000000001,"portalMetric":1.1710006004496578,"dissociatedPct":2.1999999999999997},{"tNs":30,"phase":"COHERENCE AMPLIFICATION","fidelity":0.9266,"concurrence":0.8532,"entropy":0.37848556453772836,"coherence":0.971,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7466999999999999,"portalMetric":1.2049398687558592,"dissociatedPct":2.9000000000000004},{"tNs":31,"phase":"COHERENCE AMPLIFICATION","fidelity":0.92543,"concurrence":0.85086,"entropy":0.3827510871148932,"coherence":0.969,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.687285,"portalMetric":0.9133316877277984,"dissociatedPct":3.1},{"tNs":32,"phase":"COHERENCE AMPLIFICATION","fidelity":0.92426,"concurrence":0.8485199999999999,"entropy":0.38698799065314216,"coherence":0.968,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.6878700000000001,"portalMetric":0.9104606626252051,"dissociatedPct":3.2},{"tNs":33,"phase":"COHERENCE AMPLIFICATION","fidelity":0.92309,"concurrence":0.8461799999999999,"entropy":0.3911966816130647,"coherence":0.966,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.688455,"portalMetric":0.9066583262522603,"dissociatedPct":3.4000000000000004},{"tNs":34,"phase":"COHERENCE AMPLIFICATION","fidelity":0.92192,"concurrence":0.8438399999999999,"entropy":0.395377553998114,"coherence":0.966,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.68904,"portalMetric":0.9047403692093346,"dissociatedPct":3.4000000000000004},{"tNs":35,"phase":"COHERENCE AMPLIFICATION","fidelity":0.92075,"concurrence":0.8414999999999999,"entropy":0.3995309899143554,"coherence":0.963,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.689625,"portalMetric":0.900021859706362,"dissociatedPct":3.6999999999999997},{"tNs":36,"phase":"COHERENCE AMPLIFICATION","fidelity":0.91958,"concurrence":0.8391599999999999,"entropy":0.403657360097152,"coherence":0.963,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.6902100000000001,"portalMetric":0.898116338505672,"dissociatedPct":3.6999999999999997},{"tNs":37,"phase":"COHERENCE AMPLIFICATION","fidelity":0.91841,"concurrence":0.8368199999999999,"entropy":0.40775702440719275,"coherence":0.963,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.690795,"portalMetric":0.8962140446876424,"dissociatedPct":3.6999999999999997},{"tNs":38,"phase":"COHERENCE AMPLIFICATION","fidelity":0.9172399999999999,"concurrence":0.8344799999999999,"entropy":0.4118303322980619,"coherence":0.96,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.69138,"portalMetric":0.8915289421157684,"dissociatedPct":4},{"tNs":39,"phase":"COHERENCE AMPLIFICATION","fidelity":0.9160699999999999,"concurrence":0.8321399999999999,"entropy":0.4158776232573613,"coherence":0.957,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.691965,"portalMetric":0.8868588628037544,"dissociatedPct":4.3},{"tNs":40,"phase":"COHERENCE AMPLIFICATION","fidelity":0.9148999999999999,"concurrence":0.8297999999999999,"entropy":0.41989922722323036,"coherence":0.956,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.6925500000000001,"portalMetric":0.8840532524727452,"dissociatedPct":4.3999999999999995},{"tNs":41,"phase":"COHERENCE AMPLIFICATION","fidelity":0.9137299999999999,"concurrence":0.8274599999999999,"entropy":0.42389546497795355,"coherence":0.955,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.6931350000000001,"portalMetric":0.8812547411398931,"dissociatedPct":4.5},{"tNs":42,"phase":"COHERENCE AMPLIFICATION","fidelity":0.9125599999999999,"concurrence":0.8251199999999999,"entropy":0.42786664852021145,"coherence":0.953,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.69372,"portalMetric":0.877542489765323,"dissociatedPct":4.7},{"tNs":43,"phase":"COHERENCE AMPLIFICATION","fidelity":0.9113899999999999,"concurrence":0.8227799999999998,"entropy":0.4318130814174023,"coherence":0.951,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.6943050000000001,"portalMetric":0.8738412124354568,"dissociatedPct":4.9},{"tNs":44,"phase":"COHERENCE AMPLIFICATION","fidelity":0.9102199999999999,"concurrence":0.8204399999999998,"entropy":0.43573505913935223,"coherence":0.95,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.6948900000000001,"portalMetric":0.8710677949027901,"dissociatedPct":5},{"tNs":45,"phase":"COHERENCE AMPLIFICATION","fidelity":0.9090499999999999,"concurrence":0.8180999999999998,"entropy":0.4396328693746251,"coherence":0.948,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.6954750000000001,"portalMetric":0.8673864337323409,"dissociatedPct":5.2},{"tNs":46,"phase":"COHERENCE AMPLIFICATION","fidelity":0.9078799999999999,"concurrence":0.8157599999999998,"entropy":0.44350679233055224,"coherence":0.947,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.69606,"portalMetric":0.8646289860069531,"dissociatedPct":5.3},{"tNs":47,"phase":"COHERENCE AMPLIFICATION","fidelity":0.9067099999999999,"concurrence":0.8134199999999998,"entropy":0.44735710101801685,"coherence":0.947,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.6966450000000001,"portalMetric":0.8627895972841257,"dissociatedPct":5.3},{"tNs":48,"phase":"COHERENCE AMPLIFICATION","fidelity":0.90554,"concurrence":0.81108,"entropy":0.45118406152194696,"coherence":0.945,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.69723,"portalMetric":0.8591350200077449,"dissociatedPct":5.5},{"tNs":49,"phase":"COHERENCE AMPLIFICATION","fidelity":0.9043699999999999,"concurrence":0.8087399999999998,"entropy":0.45498793325840614,"coherence":0.944,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.6978150000000001,"portalMetric":0.8563984666423046,"dissociatedPct":5.6000000000000005},{"tNs":50,"phase":"COHERENCE AMPLIFICATION","fidelity":0.9032,"concurrence":0.8064,"entropy":0.45876896921909427,"coherence":0.943,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.6984,"portalMetric":0.8536688430698739,"dissociatedPct":5.7},{"tNs":51,"phase":"COHERENCE AMPLIFICATION","fidelity":0.90203,"concurrence":0.80406,"entropy":0.4625274162040326,"coherence":0.94,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.6989850000000001,"portalMetric":0.8491394522056981,"dissociatedPct":6},{"tNs":52,"phase":"COHERENCE AMPLIFICATION","fidelity":0.90086,"concurrence":0.80172,"entropy":0.4662635150431218,"coherence":0.94,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.69957,"portalMetric":0.8473289020398242,"dissociatedPct":6},{"tNs":53,"phase":"COHERENCE AMPLIFICATION","fidelity":0.89969,"concurrence":0.79938,"entropy":0.4699775008072449,"coherence":0.938,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.700155,"portalMetric":0.8437223957552255,"dissociatedPct":6.2},{"tNs":54,"phase":"COHERENCE AMPLIFICATION","fidelity":0.89852,"concurrence":0.79704,"entropy":0.4736696030095151,"coherence":0.935,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.70074,"portalMetric":0.8392290150412419,"dissociatedPct":6.5},{"tNs":55,"phase":"COHERENCE AMPLIFICATION","fidelity":0.89735,"concurrence":0.7947,"entropy":0.47734004579724176,"coherence":0.933,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.7013250000000001,"portalMetric":0.8356457918939151,"dissociatedPct":6.7},{"tNs":56,"phase":"COHERENCE AMPLIFICATION","fidelity":0.89618,"concurrence":0.79236,"entropy":0.48098904813514065,"coherence":0.9299999999999999,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.70191,"portalMetric":0.8311794674530922,"dissociatedPct":7.000000000000001},{"tNs":57,"phase":"COHERENCE AMPLIFICATION","fidelity":0.89501,"concurrence":0.79002,"entropy":0.48461682398028394,"coherence":0.929,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.702495,"portalMetric":0.8285112392259019,"dissociatedPct":7.1},{"tNs":58,"phase":"COHERENCE AMPLIFICATION","fidelity":0.89384,"concurrence":0.7876799999999999,"entropy":0.4882235824492489,"coherence":0.929,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.70308,"portalMetric":0.8267397052966945,"dissociatedPct":7.1},{"tNs":59,"phase":"COHERENCE AMPLIFICATION","fidelity":0.89267,"concurrence":0.7853399999999999,"entropy":0.49180952797789607,"coherence":0.929,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.7036650000000001,"portalMetric":0.8249711169377473,"dissociatedPct":7.1},{"tNs":60,"phase":"COHERENCE AMPLIFICATION","fidelity":0.8915,"concurrence":0.7829999999999999,"entropy":0.49537486047417817,"coherence":0.929,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.70425,"portalMetric":0.8232054668086615,"dissociatedPct":7.1},{"tNs":61,"phase":"COHERENCE AMPLIFICATION","fidelity":0.89033,"concurrence":0.7806599999999999,"entropy":0.4989197754643557,"coherence":0.928,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.704835,"portalMetric":0.8205585250448686,"dissociatedPct":7.199999999999999},{"tNs":62,"phase":"COHERENCE AMPLIFICATION","fidelity":0.88916,"concurrence":0.7783199999999999,"entropy":0.502444464232971,"coherence":0.927,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.70542,"portalMetric":0.8179182954835417,"dissociatedPct":7.3},{"tNs":63,"phase":"COHERENCE AMPLIFICATION","fidelity":0.88799,"concurrence":0.7759799999999999,"entropy":0.5059491139569101,"coherence":0.923,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.7060050000000001,"portalMetric":0.8126434501172086,"dissociatedPct":7.7},{"tNs":64,"phase":"COHERENCE AMPLIFICATION","fidelity":0.8868199999999999,"concurrence":0.7736399999999999,"entropy":0.509433907833862,"coherence":0.922,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.70659,"portalMetric":0.8100222590186671,"dissociatedPct":7.8},{"tNs":65,"phase":"COHERENCE AMPLIFICATION","fidelity":0.8856499999999999,"concurrence":0.7712999999999999,"entropy":0.5128990252054626,"coherence":0.921,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.707175,"portalMetric":0.8074077208611729,"dissociatedPct":7.9},{"tNs":66,"phase":"COHERENCE AMPLIFICATION","fidelity":0.8844799999999999,"concurrence":0.7689599999999999,"entropy":0.5163446416753991,"coherence":0.92,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.7077600000000001,"portalMetric":0.8047998191477336,"dissociatedPct":8},{"tNs":67,"phase":"COHERENCE AMPLIFICATION","fidelity":0.8833099999999999,"concurrence":0.7666199999999999,"entropy":0.5197709292227254,"coherence":0.919,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.7083450000000001,"portalMetric":0.8021985374358538,"dissociatedPct":8.1},{"tNs":68,"phase":"COHERENCE AMPLIFICATION","fidelity":0.8821399999999999,"concurrence":0.7642799999999998,"entropy":0.5231780563106334,"coherence":0.919,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.7089300000000001,"portalMetric":0.8004748875065237,"dissociatedPct":8.1},{"tNs":69,"phase":"COHERENCE AMPLIFICATION","fidelity":0.8809699999999999,"concurrence":0.7619399999999998,"entropy":0.5265661879909022,"coherence":0.917,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.709515,"portalMetric":0.7970157685179312,"dissociatedPct":8.3},{"tNs":70,"phase":"INTERFACE FORMATION","fidelity":0.8797999999999999,"concurrence":0.7595999999999998,"entropy":0.5299354860042381,"coherence":0.915,"fieldMVm":3.5,"energyJ":5.4231900274999996e-11,"decoherenceRate":0.7101000000000001,"portalMetric":0.7935669623996618,"dissociatedPct":8.5},{"tNs":71,"phase":"INTERFACE FORMATION","fidelity":0.885,"concurrence":0.77,"entropy":0.5148156530047154,"coherence":0.912,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7675000000000001,"portalMetric":1.0516221498371334,"dissociatedPct":8.799999999999999},{"tNs":72,"phase":"INTERFACE FORMATION","fidelity":0.89,"concurrence":0.78,"entropy":0.49991595816452794,"coherence":0.911,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7649999999999999,"portalMetric":1.059856209150327,"dissociatedPct":8.9},{"tNs":73,"phase":"INTERFACE FORMATION","fidelity":0.895,"concurrence":0.79,"entropy":0.48464773973144526,"coherence":0.908,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7625,"portalMetric":1.0657836065573771,"dissociatedPct":9.2},{"tNs":74,"phase":"INTERFACE FORMATION","fidelity":0.9,"concurrence":0.8,"entropy":0.4689955935892811,"coherence":0.903,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.76,"portalMetric":1.069342105263158,"dissociatedPct":9.700000000000001},{"tNs":75,"phase":"INTERFACE FORMATION","fidelity":0.905,"concurrence":0.81,"entropy":0.45294254818728313,"coherence":0.896,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7575000000000001,"portalMetric":1.0704686468646865,"dissociatedPct":10.4},{"tNs":76,"phase":"INTERFACE FORMATION","fidelity":0.91,"concurrence":0.8200000000000001,"entropy":0.4364698170641028,"coherence":0.891,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7549999999999999,"portalMetric":1.0739205298013248,"dissociatedPct":10.9},{"tNs":77,"phase":"INTERFACE FORMATION","fidelity":0.915,"concurrence":0.8300000000000001,"entropy":0.41955649623854685,"coherence":0.891,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7525,"portalMetric":1.0834086378737542,"dissociatedPct":10.9},{"tNs":78,"phase":"INTERFACE FORMATION","fidelity":0.92,"concurrence":0.8400000000000001,"entropy":0.40217919020227266,"coherence":0.889,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.75,"portalMetric":1.0905066666666667,"dissociatedPct":11.1},{"tNs":79,"phase":"INTERFACE FORMATION","fidelity":0.9136000000000001,"concurrence":0.8272000000000002,"entropy":0.42433793921503227,"coherence":0.888,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7531999999999999,"portalMetric":1.077106744556559,"dissociatedPct":11.200000000000001},{"tNs":80,"phase":"INTERFACE FORMATION","fidelity":0.9072,"concurrence":0.8144,"entropy":0.44574743529402067,"coherence":0.884,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7564,"portalMetric":1.0602390269698574,"dissociatedPct":11.600000000000001},{"tNs":81,"phase":"INTERFACE FORMATION","fidelity":0.9008,"concurrence":0.8016000000000001,"entropy":0.46645451179720043,"coherence":0.88,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7596,"portalMetric":1.043580832016851,"dissociatedPct":12},{"tNs":82,"phase":"INTERFACE FORMATION","fidelity":0.8944000000000001,"concurrence":0.7888000000000002,"entropy":0.4864998800342472,"coherence":0.877,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7627999999999999,"portalMetric":1.0283020450970113,"dissociatedPct":12.3},{"tNs":83,"phase":"INTERFACE FORMATION","fidelity":0.888,"concurrence":0.776,"entropy":0.5059192440727412,"coherence":0.875,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.766,"portalMetric":1.014360313315927,"dissociatedPct":12.5},{"tNs":84,"phase":"INTERFACE FORMATION","fidelity":0.8816,"concurrence":0.7632000000000001,"entropy":0.524744159902649,"coherence":0.874,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7691999999999999,"portalMetric":1.0017139885595425,"dissociatedPct":12.6},{"tNs":85,"phase":"INTERFACE FORMATION","fidelity":0.8752000000000001,"concurrence":0.7504000000000002,"entropy":0.543002708287395,"coherence":0.867,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7724,"portalMetric":0.9823904712584155,"dissociatedPct":13.3},{"tNs":86,"phase":"INTERFACE FORMATION","fidelity":0.8688,"concurrence":0.7376,"entropy":0.5607200292191274,"coherence":0.865,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7756000000000001,"portalMetric":0.9689427539969054,"dissociatedPct":13.5},{"tNs":87,"phase":"INTERFACE FORMATION","fidelity":0.8624,"concurrence":0.7248000000000001,"entropy":0.5779187518246799,"coherence":0.859,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7787999999999999,"portalMetric":0.9512090395480227,"dissociatedPct":14.099999999999998},{"tNs":88,"phase":"INTERFACE FORMATION","fidelity":0.8560000000000001,"concurrence":0.7120000000000002,"entropy":0.594619344095012,"coherence":0.859,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.782,"portalMetric":0.9402864450127878,"dissociatedPct":14.099999999999998},{"tNs":89,"phase":"INTERFACE FORMATION","fidelity":0.8496,"concurrence":0.6992,"entropy":0.6108404002939237,"coherence":0.857,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7851999999999999,"portalMetric":0.9272888436067245,"dissociatedPct":14.299999999999999},{"tNs":90,"phase":"OBSERVATION & MEASUREMENT","fidelity":0.8432000000000001,"concurrence":0.6864000000000001,"entropy":0.6265988793316852,"coherence":0.853,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7884,"portalMetric":0.9122902080162355,"dissociatedPct":14.7},{"tNs":91,"phase":"OBSERVATION & MEASUREMENT","fidelity":0.8368,"concurrence":0.6736,"entropy":0.6419103041282608,"coherence":0.849,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7916000000000001,"portalMetric":0.8974775138959069,"dissociatedPct":15.1},{"tNs":92,"phase":"OBSERVATION & MEASUREMENT","fidelity":0.8304,"concurrence":0.6608,"entropy":0.6567889296271465,"coherence":0.848,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.7948,"portalMetric":0.8859828887770509,"dissociatedPct":15.2},{"tNs":93,"phase":"OBSERVATION & MEASUREMENT","fidelity":0.8240000000000001,"concurrence":0.6480000000000001,"entropy":0.6712478853829505,"coherence":0.846,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.798,"portalMetric":0.8735639097744361,"dissociatedPct":15.4},{"tNs":94,"phase":"OBSERVATION & MEASUREMENT","fidelity":0.8176,"concurrence":0.6352,"entropy":0.6852992973512013,"coherence":0.842,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.8011999999999999,"portalMetric":0.8592351472790815,"dissociatedPct":15.8},{"tNs":95,"phase":"OBSERVATION & MEASUREMENT","fidelity":0.8112,"concurrence":0.6224000000000001,"entropy":0.6989543925328239,"coherence":0.841,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.8044,"portalMetric":0.8481093983092989,"dissociatedPct":15.9},{"tNs":96,"phase":"OBSERVATION & MEASUREMENT","fidelity":0.8048000000000001,"concurrence":0.6096000000000001,"entropy":0.7122235893816857,"coherence":0.839,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.8075999999999999,"portalMetric":0.8360911342248639,"dissociatedPct":16.1},{"tNs":97,"phase":"OBSERVATION & MEASUREMENT","fidelity":0.7984,"concurrence":0.5968,"entropy":0.7251165763105973,"coherence":0.837,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.8108,"portalMetric":0.8241993093241243,"dissociatedPct":16.3},{"tNs":98,"phase":"OBSERVATION & MEASUREMENT","fidelity":0.792,"concurrence":0.5840000000000001,"entropy":0.7376423801856891,"coherence":0.833,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.8140000000000001,"portalMetric":0.8104864864864865,"dissociatedPct":16.7},{"tNs":99,"phase":"OBSERVATION & MEASUREMENT","fidelity":0.7856000000000001,"concurrence":0.5712000000000002,"entropy":0.74980942634968,"coherence":0.829,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.8171999999999999,"portalMetric":0.796943710230054,"dissociatedPct":17.1},{"tNs":100,"phase":"OBSERVATION & MEASUREMENT","fidelity":0.7792,"concurrence":0.5584,"entropy":0.7616255914382687,"coherence":0.827,"fieldMVm":5,"energyJ":1.106773475e-10,"decoherenceRate":0.8204,"portalMetric":0.7854685519258897,"dissociatedPct":17.299999999999997}] [];
+
+const canvas = document.getElementById("simCanvas");
+const ctx = canvas.getContext("2d");
+const chart = document.getElementById("chartTelemetry");
+const cctx = chart.getContext("2d");
+let frame = 0;
+let playing = false;
+let speed = 1;
+
+function phaseOf(t){ if(t<10) return "ENTANGLEMENT SEEDING"; if(t<30) return "GHz FIELD ACTIVATION"; if(t<70) return "COHERENCE AMPLIFICATION"; if(t<90) return "INTERFACE FORMATION"; return "OBSERVATION"; }
+
+function drawStep(idx){
+  const s = TELEMETRY[Math.min(idx, TELEMETRY.length-1)];
+  if(!s) return;
+  document.getElementById("phaseLabel").textContent = "Phase: " + s.phase;
+  document.getElementById("mFidelity").textContent = s.fidelity.toFixed(2);
+  document.getElementById("bFidelity").style.width = (s.fidelity*100)+"%";
+  document.getElementById("mCoherence").textContent = s.coherence.toFixed(2);
+  document.getElementById("bCoherence").style.width = (s.coherence*100)+"%";
+  document.getElementById("mDecoherence").textContent = s.decoherenceRate.toFixed(4);
+  document.getElementById("mPortal").textContent = s.portalMetric.toFixed(3);
+  document.getElementById("hud").innerHTML =
+    "t = "+s.tNs.toFixed(0)+" ns<br>Fidelity: "+s.fidelity.toFixed(2)+
+    "<br>Concurrence: "+s.concurrence.toFixed(2)+"<br>Entropy: "+s.entropy.toFixed(2)+" ebits"+
+    "<br>Field: "+s.fieldMVm.toFixed(2)+" MV/m<br>Dissociated: "+s.dissociatedPct.toFixed(1)+"%";
+
+  // chamber rendering
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const w=canvas.width, h=canvas.height;
+  // field glow
+  const glow = ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,w/2);
+  glow.addColorStop(0, `rgba(45,126,181,${0.08+s.fieldMVm*0.05})`);
+  glow.addColorStop(1, "rgba(0,0,0,0)");
+  ctx.fillStyle = glow; ctx.fillRect(0,0,w,h);
+  // particles (deterministic pseudo-positions from index)
+  for(let i=0;i<400;i++){
+    const px = (i*137.508)%w, py = (i*97.31)%h;
+    const wave = Math.sin(i + s.tNs*0.05 + s.fieldMVm)*0.5;
+    const dissociated = (i/400)*100 < s.dissociatedPct;
+    ctx.beginPath();
+    ctx.arc(px, py+wave*4, dissociated?1.2:2, 0, Math.PI*2);
+    ctx.fillStyle = dissociated ? "rgba(200,90,58,.7)" : "rgba(125,211,252,.65)";
+    ctx.fill();
+  }
+  // portal ring when P > 1
+  if(s.portalMetric>1){
+    ctx.beginPath(); ctx.arc(w/2,h/2, 60+s.portalMetric*20, 0, Math.PI*2);
+    ctx.strokeStyle = "rgba(251,146,60,.8)"; ctx.lineWidth=3; ctx.stroke();
+  }
+  ctx.font="11px monospace"; ctx.fillStyle="rgba(148,163,184,.5)";
+  ctx.fillText("SIMULATION", w-110, h-14);
+
+  // telemetry chart
+  cctx.clearRect(0,0,chart.width,chart.height);
+  const cw=chart.width, ch=chart.height;
+  cctx.font="10px monospace"; cctx.fillStyle="#64748b";
+  cctx.fillText("P (portal) — blue   F (fidelity) — green   C (coherence) — orange", 8, 14);
+  const n=TELEMETRY.length;
+  const series = [
+    { key:"portalMetric", color:"#2d7eb5" },
+    { key:"fidelity", color:"#059669" },
+    { key:"coherence", color:"#c85a3a" },
+  ];
+  series.forEach(sr=>{
+    cctx.strokeStyle=sr.color; cctx.lineWidth=1.6; cctx.beginPath();
+    for(let i=0;i<n;i++){
+      const x = (i/(n-1))*cw;
+      const y = ch-20 - Math.min(1,TELEMETRY[i][sr.key])*(ch-34);
+      i===0 ? cctx.moveTo(x,y) : cctx.lineTo(x,y);
+    }
+    cctx.stroke();
+  });
+  // threshold line
+  cctx.strokeStyle="rgba(220,38,38,.5)"; cctx.setLineDash([4,4]); cctx.beginPath();
+  cctx.moveTo(0, ch-20-(ch-34)); cctx.lineTo(cw, ch-20-(ch-34)); cctx.stroke();
+  cctx.setLineDash([]);
+}
+
+function play(){
+  if(playing) return;
+  playing = true;
+  const log = document.getElementById("log");
+  log.innerHTML = "";
+  const mark = (t,msg,cls) => { const d=document.createElement("div"); d.className=cls||""; d.textContent=`t=${t}ns  ${msg}`; log.appendChild(d); log.scrollTop=log.scrollHeight; };
+  mark(0,"INITIALIZE — Yee grid + dust cloud placed","good");
+  frame = 0;
+  const step = () => {
+    if(frame >= TELEMETRY.length){ playing=false; mark(TELEMETRY[TELEMETRY.length-1].tNs,"RUN COMPLETE — forced decoherence at end","crit"); return; }
+    const s = TELEMETRY[frame];
+    if(frame%5===0){ mark(s.tNs, s.phase, s.portalMetric>1?"crit":(s.phase==="INTERFACE FORMATION"?"warn":"good")); }
+    if(s.portalMetric>1 && frame%10===0) mark(s.tNs, `Portal Metric P=${s.portalMetric.toFixed(2)} > 1.0 (model interface)`, "crit");
+    drawStep(frame);
+    frame+=speed;
+    setTimeout(step, 40);
+  };
+  step();
+}
+
+drawStep(0);
+</script>
+</body>
+</html>

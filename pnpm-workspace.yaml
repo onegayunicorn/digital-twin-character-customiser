@@ -1,3 +1,12 @@
 packages:
+  - "cores/*"
+  - "engines/*"
+  - "web-app"
+  - "server"
+  - "shared"
+  - "simulations"
+  - "pipelines"
+  - "tests"
+  # Legacy IPP workspaces (kept for backward compatibility)
   - "apps/*"
   - "packages/*"

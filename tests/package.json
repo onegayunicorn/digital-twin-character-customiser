@@ -1,0 +1,23 @@
+{
+  "name": "tests",
+  "version": "4.1.0",
+  "private": true,
+  "description": "Aether Core — cross-package tests",
+  "dependencies": {
+    "@dt-core/agent-matrix": "4.1.0",
+    "@dt-core/ai-router": "4.1.0",
+    "@dt-core/simulation": "4.1.0",
+    "@dt-core/state": "4.1.0",
+    "@dt-core/types": "4.1.0",
+    "@dt-engine/evolution": "4.1.0",
+    "@dt-engine/feature-grid": "4.1.0",
+    "@dt-engine/gltf-registry": "4.1.0",
+    "@dt-engine/lifestyle": "4.1.0",
+    "@dt-engine/mesh-pipeline": "4.1.0",
+    "@dt-engine/telemetry": "4.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "vitest": "^2.1.8"
+  }
+}

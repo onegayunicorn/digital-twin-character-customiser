@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# pre-push — full test suite before pushing.
+set -euo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+echo "▸ pre-push: running full test suite…"
+npx vitest run || { echo "✖ tests failed — push aborted"; exit 1; }
+
+echo "✔ pre-push checks passed"

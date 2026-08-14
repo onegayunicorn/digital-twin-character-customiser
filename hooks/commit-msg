@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# commit-msg — enforce conventional commit subjects.
+set -euo pipefail
+
+MSG_FILE="$1"
+SUBJECT="$(head -1 "$MSG_FILE")"
+
+if ! echo "$SUBJECT" | grep -qE '^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|sim|simulation|revert)(\(.+\))?!?: '; then
+  echo "✖ commit-msg: subject must follow conventional commits:"
+  echo "    feat(web-app): add showcase page"
+  echo "    fix(core): clamp feature coordinates"
+  echo "    sim(quantum): update portal metric"
+  exit 1
+fi
+
+echo "✔ commit-msg ok"

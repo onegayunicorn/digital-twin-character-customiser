@@ -1,0 +1,20 @@
+{
+  "name": "simulations",
+  "version": "4.1.0",
+  "private": true,
+  "description": "Aether Core — runnable simulations (lifestyle, agent-matrix, telemetry, quantum-interface)",
+  "dependencies": {
+    "@dt-core/agent-matrix": "4.1.0",
+    "@dt-core/ai-router": "4.1.0",
+    "@dt-core/simulation": "4.1.0",
+    "@dt-core/state": "4.1.0",
+    "@dt-core/types": "4.1.0",
+    "@dt-engine/evolution": "4.1.0",
+    "@dt-engine/lifestyle": "4.1.0",
+    "@dt-engine/telemetry": "4.1.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}

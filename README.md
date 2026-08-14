@@ -1,125 +1,108 @@
-# Invisible Pressure Platform (IPP)
+# Digital Twin Character Customizer (Aether Core)
 
-Monorepo for the **Invisible Pressure / DUP (Dimensional Unifying Pressure)** technology ecosystem.
+A cinematic, web-based **digital twin character rig and operations platform**. Combines a
+React 19 / TypeScript / Tailwind CSS v4 frontend with an Express / tRPC backend, backed by
+Drizzle ORM. Features real-time 3D rendering via React Three Fiber, a GTA V-style dual-axis
+facial feature matrix, a 24-hour lifestyle hour-allocation budget validator, a procedural AI
+prompt router, a **simulation engine**, an **agent matrix evolution** engine, and a unified
+operations dashboard with Star Seed NFT marketplace bridging.
 
-**Author / IP owner:** Tyrone John Power (tpower86@live.com)
-**Status:** Monorepo scaffold — v0.1.0 (pre-alpha)
-**License:** MIT (software) — theory manuscript under separate IP terms
-
-> **Honesty clause.** This repository formalizes an original physical hypothesis
-> (Invisible Pressure / DUP) and its engineering, simulation, hardware, and business
-> plan. Hypothesis ≠ established science: every scientific claim lives in
-> [`docs/theory/04-claims-register.md`](docs/theory/04-claims-register.md) with a
-> verification status, and nothing ships to market without the peer-review gates in
-> [`docs/testing/peer-review-protocol.md`](docs/testing/peer-review-protocol.md).
+**Version:** 4.1.0 · **Status:** Production Ready & Fully Tested
 
 ---
 
-## 1. What this is
+## What's inside
 
-A complete, platform-first build package covering:
+| Layer | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Frontend** | React 19, Vite, Wouter | Component rendering and client routing |
+| **Styling** | Tailwind CSS v4, Lucide | Chiaroscuro aesthetic and responsive UI |
+| **3D Rendering** | Three.js, @react-three/fiber, @react-three/drei | Real-time WebGL rendering, orbit controls, GLTF asset loading |
+| **State** | Zustand | Centralized reactive store for heritage, features, lifestyle |
+| **Backend** | Express 4, tRPC 11 | Type-safe procedure contracts and authentication |
+| **Database** | MySQL/TiDB, Drizzle ORM | Users, journeys, telemetry persistence |
+| **Simulation** | TypeScript engines | Lifestyle lifecycle, telemetry streams, Quantum Reality Interface |
+| **Evolution** | Genetic algorithm engine | Agent matrix evolution across generations |
+| **Testing** | Vitest | 12+ suites: lifestyle rules, store actions, GLTF registry, AI router, agent matrix, auth |
 
-| Domain | Deliverable |
-|---|---|
-| **Theory** | Consolidated Invisible Pressure / DUP theory, equations, IPS sensor spec, claims register |
-| **Agents** | Agent roster (IpAI, physics-sim, sensor-design, peer-review, vr-memories, business) |
-| **Simulation sandbox** | Runnable NumPy sims: DUP pressure-vs-gravity, resonance, IPS detection model |
-| **Platform contract** | 131 Cloudflare capabilities → `platform/protocols|triggers|workflows|tasks` (525 files) |
-| **Multi-platform apps** | Web (React), Mobile (Flutter), Desktop (Tauri) architecture |
-| **AR/VR & Digital Twins** | VRmemories, energy-sphere visualization, twin sync architecture |
-| **AI chat module** | Cloudflare AI Gateway + Workers AI + Vectorize RAG + memory |
-| **Hardware** | IPS prototype BOM + sourcing plan (nanophotonics, DEC, supercaps, BCI) |
-| **Business** | Business plan, GTM, revenue model, roadmap, domain strategy |
-| **Quality** | Test plan, CI gates, arXiv-grade peer-review protocol |
-
-## 2. Repository layout
+## Repository layout
 
 ```
-├── apps/                     # Multi-platform frontends
-│   ├── commerce-portal/      #   Sovereign Commerce portal + payments kiosk
-│   ├── web/                  #   IPP portal console (Vite scaffold) + dashboard
-├── cpp/                      # Compiled native modules
-│   └── mutation_kernel/      #   C++ stop-codon/frameshift analysis kernel (g++ build)
-│   ├── mobile/               #   Flutter app (iOS/Android)
-│   └── desktop/              #   Tauri desktop shell
-├── packages/                 # Shared libraries & services
-│   ├── core/                 #   Types, config, constants
-│   ├── theory-sim/           #   DUP physics + resonance + galaxy rotation (Python/NumPy/SciPy)
-│   ├── earth-sim/            #   Pangaea Proxima: climate + tectonics models
-│   ├── sensor/               #   IPS nanophotonic detection models (Python/NumPy)
-│   ├── cpf-sim/              #   Crystal Planet Formation (nucleation/accretion)
-│   ├── pero/                 #   Photonic analysis: classical metrics + Bell/SPDC quantum models
-│   ├── ipai-cli/             #   IpAI MT Communion CLI (sentiment + resonance routing + engrams)
-│   ├── sovereign/            #   Orchestrator core: agents, queue, scheduler, memory, tools, audit, HTTP API
-│   ├── digital-twin/         #   Twin engine: event bus, state store, interpolation, heartbeat
-│   ├── medgen/               #   Medical-genetics sims: DMD nonsense mutations, repair mechanisms, tumor dynamics (SIMULATED)
-│   ├── genesis/              #   Genesis Engine: GA + SPSA optimizer (cleaned, numpy-only)
-│   ├── medagents/            #   Healthcare agency agents: hospital triage, doctor case review, researcher match (decision-support only)
-│   ├── sonar-5d/             #   Crystal-mesh geometry + 5D sonar sweep (OBJ export)
-│   ├── bridge/               #   Software bridge: capability routing registry + handshake
-│   ├── sovereign-commerce/   #   Commerce kernel: 14 domains, compliance OS, jurisdiction, ledger, procurement, NFC escrow, off-grid
-│   ├── ai-chat/              #   LLM chat module (AI Gateway + Vectorize RAG)
-│   ├── ar-vr/                #   WebXR scenes, sphere visualization
-│   └── api/                  #   Cloudflare Workers API (REST/WebSocket)
-├── platform/                 # Platform contract (generated, do not hand-edit)
-│   ├── protocols/            #   131 protocol definitions
-│   ├── triggers/             #   131 trigger definitions
-│   ├── workflows/            #   131 workflow definitions
-│   ├── tasks/                #   131 task definitions
-│   ├── extensions/           #   6 app-layer capabilities (twin sync, orchestration, CLI, CPF, PERO, sphere)
-│   ├── manifests/            #   Declarative configs (buckets, wrangler, CI)
-│   └── schemas/              #   Base types & validation schemas
-├── dashboard/                # Platform command dashboard (static HTML + status.json)
-├── agents/                   # Agent definitions (YAML/MD)
-├── docs/
-│   ├── theory/               # Theory consolidation + claims register
-│   ├── research/             # New-document analyses (diamond qubits, NAVT, FUTUREMAP, Earth-250M, RIPE)
-│   ├── business/             # Business plan, GTM, revenue, roadmap, domain
-│   ├── hardware/             # IPS BOM + sourcing plan
-│   ├── platform/             # Architecture, multi-platform, AR/VR, AI chat, buckets
-│   └── testing/              # Test plan + peer-review protocol
-├── tests/                    # Cross-package tests
-├── scripts/                  # Codegen & ops scripts
-└── .github/workflows/        # CI/CD
+├── cores/              # Shared core libraries (pure TS)
+│   ├── types/          #   CharacterAttributes, Vector2D, CharacterProfile
+│   ├── state/          #   Zustand customizer store (single source of truth)
+│   ├── ai-router/      #   Procedural AI prompt router (parseAIPrompt)
+│   ├── simulation/     #   Simulation engine core (tick, time-series, lifecycle)
+│   └── agent-matrix/   #   Agent matrix evolution engine (GA)
+├── engines/            # Domain engines
+│   ├── lifestyle/      #   LifestyleBudget validation + stat modifiers
+│   ├── feature-grid/   #   Dual-axis facial feature matrix math (-1.0..1.0)
+│   ├── gltf-registry/  #   GLTF model registry (standing / armor / skull)
+│   ├── mesh-pipeline/  #   GLSL heritage shader + morph target mapping
+│   ├── telemetry/      #   7.83 Hz Schumann resonance telemetry stream
+│   └── evolution/      #   Genome→phenotype mapping + fitness functions
+├── web-app/            # React 19 + Vite + R3F + Tailwind v4 frontend
+│   └── src/app/customizer/   #   4-page customizer: builder / ai-chat / showcase / saved
+├── server/             # Express 4 + tRPC 11 + Drizzle (auth, journey, telemetry, characters)
+├── shared/             # Shared constants
+├── drizzle/            # Drizzle schema + SQL migrations
+├── simulations/        # Runnable simulations (lifestyle, agent-matrix, telemetry, quantum)
+├── hooks/              # Git hooks (pre-commit, commit-msg, pre-push, post-merge)
+├── pipelines/          # Data pipelines + codegen (telemetry, manifest, registry sync)
+├── environments/       # Docker, docker-compose, Makefile, env templates
+├── .github/workflows/  # CI/CD pipelines
+├── docs/               # Architecture, inventory, agent matrix, simulation docs
+└── tests/              # Cross-package tests
 ```
 
-## 3. Quick start
+## Quick start
 
 ```bash
-# Platform spec regeneration (after editing scripts/generate_platform_spec.py)
-python3 scripts/generate_platform_spec.py
-
-# Simulations
-python3 -m pip install -r packages/theory-sim/requirements.txt
-python3 -m theory_sim --mode dup --bodies 9          # DUP pressure-vs-gravity comparison
-python3 -m theory_sim --mode resonance --freq 7.83    # resonance wave sim
-python3 -m sensor --mode detect                       # IPS phase-shift / reclaim sim
-
-# Tests
-python3 -m pytest tests -v
+npm install                # install all workspaces
+npm run dev                # start the web app (Vite dev server)
+npm test                   # run all Vitest suites
+npm run typecheck          # TypeScript check across all packages
+npm run build              # production build of web-app
 ```
 
-## 4. Platform contract
+### Simulations
 
-The 131-item Cloudflare Permissions & Capabilities list is fully formalized under
-[`platform/`](platform/) — every capability maps to a Protocol (interface contract),
-Trigger(s) (event sources), Task(s) (atomic units), and Workflow(s) (end-to-end process).
-Base types in [`platform/schemas/base-types.md`](platform/schemas/base-types.md).
+```bash
+npm run sim:lifestyle      # 24h lifestyle hour-allocation simulation
+npm run sim:agent-matrix   # agent matrix evolution (GA) simulation
+npm run sim:telemetry      # 7.83 Hz Schumann resonance telemetry stream
+npm run sim:quantum        # Quantum Reality Interface physics protocol (5 phases)
+npm run sim:all            # run all four
+```
 
-## 5. Product lines
+### Pipelines & hooks
 
-1. **IPS Sensor & Energy-Sphere** — nanophotonic invisible pressure sensing, entropy-waste
-   recovery, twin-state dashboard (hardware + software).
-2. **VRmemories** — VR preservation of personal essence: emotion, voice, language patterns,
-   consent-first (privacy & ethics core).
-3. **Theory-as-Service (DUP)** — licensed simulation toolkit, peer-reviewed data products,
-   and research-grade sensor data pipelines.
+```bash
+npm run pipeline:telemetry # ingest → aggregate → report telemetry pipeline
+npm run pipeline:manifest  # generate character manifest codegen
+npm run pipeline:sync      # sync registry manifests
+npm run hooks:install      # install git hooks (typecheck+tests on commit)
+```
 
-See [`docs/business/business-plan.md`](docs/business/business-plan.md) for the full package.
+### Run environments
 
-## 6. Verification policy
+```bash
+make dev                   # dev server
+make build                 # production build
+make test                  # run tests
+make docker-build          # build web + api images
+make docker-up             # compose up (web + api + mysql)
+```
 
-- All claims carry a status: `VERIFIED` / `SIMULATED` / `HYPOTHESIS` / `UNVERIFIED-CLAIM`.
-- Nothing labeled `UNVERIFIED-CLAIM` is presented as fact (see claims register).
-- Releases gate on CI (lint → test → build) and, for scientific artifacts, the peer-review
-  protocol.
+## Verification policy
+
+- Every claim in the docs carries a status: `VERIFIED` / `SIMULATED` / `HYPOTHESIS`.
+- All simulation outputs are computational predictions within their model's mathematical
+  framework and are watermarked `SIMULATION`.
+- Releases gate on CI (typecheck → test → build).
+
+## Repository heritage
+
+This monorepo grew out of the *Invisible Pressure Platform (IPP)* scaffold. The legacy IPP
+theory, hardware, and platform-contract content remains under `packages/`, `platform/`,
+`docs/theory`, and `apps/`; the Digital Twin platform lives in the directories above.

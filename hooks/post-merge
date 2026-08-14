@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# post-merge — refresh dependencies after pulls.
+set -euo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+if [ -f package-lock.json ] && ! cmp -s package-lock.json <(git show HEAD:package-lock.json 2>/dev/null || true); then
+  echo "▸ post-merge: dependencies changed — running npm install…"
+  npm install --no-audit --no-fund
+  echo "✔ dependencies refreshed"
+fi

@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Quantum Reality Interface — Dashboard (SIMULATION)</title>
+<style>
+  :root { --bg:#0a0f1c; --card:#101830; --line:#1e2a44; --text:#cbd5e1; --muted:#64748b; --accent:#2d7eb5; --accent2:#c85a3a; --ok:#059669; --warn:#b45309; }
+  * { box-sizing:border-box; margin:0; padding:0; font-family:"IBM Plex Sans",system-ui,sans-serif; }
+  body { background:radial-gradient(1000px 500px at 20% -10%, rgba(45,126,181,.12), transparent 60%), var(--bg); color:var(--text); min-height:100vh; padding:20px; }
+  .wrap { max-width:1400px; margin:0 auto; }
+  header { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:16px; }
+  h1 { font-size:26px; font-weight:700; }
+  h1 span { background:linear-gradient(100deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .pill { display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:20px; font-size:11px; font-weight:600; letter-spacing:.04em; }
+  .pill.idle { background:rgba(100,116,139,.14); color:var(--muted); }
+  .pill.warn { background:rgba(220,38,38,.12); color:#f87171; border:1px solid rgba(220,38,38,.3); }
+  .notice { background:linear-gradient(90deg, rgba(220,38,38,.07), rgba(200,90,58,.05)); border:1px solid rgba(220,38,38,.22); border-left:3px solid #dc2626; border-radius:8px; padding:10px 14px; font-size:12px; margin-bottom:16px; }
+  .grid { display:grid; grid-template-columns:1fr 360px; gap:16px; }
+  @media (max-width:1000px){ .grid{ grid-template-columns:1fr; } }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; }
+  .card h2 { font-size:14px; font-weight:600; margin-bottom:12px; }
+  canvas { width:100%; display:block; border-radius:10px; background:linear-gradient(180deg,#0a0f1c,#0d1525); }
+  .metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:12px 0; }
+  @media (max-width:800px){ .metrics{ grid-template-columns:repeat(2,1fr); } }
+  .metric .label { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:4px; }
+  .metric .value { font-size:22px; font-weight:700; font-variant-numeric:tabular-nums; }
+  .bar { height:4px; background:rgba(45,126,181,.15); border-radius:2px; margin-top:6px; overflow:hidden; }
+  .bar i { display:block; height:100%; background:var(--accent); transition:width .3s; }
+  .log { font-family:ui-monospace,monospace; font-size:11px; max-height:220px; overflow-y:auto; }
+  .log div { padding:3px 6px; border-bottom:1px solid var(--line); color:var(--muted); }
+  .log .good { color:var(--ok); } .log .warn { color:var(--warn); } .log .crit { color:#f87171; font-weight:600; }
+  .watermark { position:absolute; right:12px; bottom:8px; font-size:10px; color:rgba(148,163,184,.35); font-weight:600; letter-spacing:.08em; }
+  .rel { position:relative; }
+  .hud { position:absolute; left:10px; top:10px; font-family:ui-monospace,monospace; font-size:11px; color:#cbd5e1; background:rgba(10,15,28,.8); border:1px solid rgba(45,126,181,.3); border-radius:6px; padding:8px 10px; line-height:1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.18em;font-weight:600;">Theoretical Physics Simulation Platform</div>
+      <h1>Quantum Reality Interface <span>v2.0</span></h1>
+      <div style="font-size:13px;color:var(--muted);margin-top:4px;">Photonic Entanglement + GHz Molecular Oscillation — Computational Model</div>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <span class="pill warn">⚠ SIMULATION ONLY</span>
+    </div>
+  </header>
+  <div class="notice"><strong style="color:#f87171;">Scientific Notice:</strong> "Portal formation" is a model-internal metric, <strong>not</strong> an experimentally-verified physical phenomenon. All outputs are mathematical predictions within this framework.</div>
+
+  <div class="grid">
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card rel">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <h2 style="margin:0;">Reaction Chamber Visualization</h2>
+          <span id="phaseLabel" class="pill idle">Phase: —</span>
+        </div>
+        <canvas id="simCanvas" width="900" height="420"></canvas>
+        <div class="hud" id="hud"></div>
+        <div class="watermark">SIMULATION</div>
+      </div>
+
+      <div class="metrics">
+        <div class="card metric"><div class="label">Entanglement Fidelity</div><div class="value" id="mFidelity" style="color:var(--accent);">0.00</div><div class="bar"><i id="bFidelity"></i></div></div>
+        <div class="card metric"><div class="label">Molecular Coherence</div><div class="value" id="mCoherence" style="color:var(--ok);">0.00</div><div class="bar"><i id="bCoherence" style="background:var(--ok);"></i></div></div>
+        <div class="card metric"><div class="label">Decoherence Rate</div><div class="value" id="mDecoherence" style="color:var(--accent2);">0.00</div></div>
+        <div class="card metric"><div class="label">Portal Metric P</div><div class="value" id="mPortal" style="color:var(--accent);">0.000</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">Threshold <strong>1.000</strong></div></div>
+      </div>
+
+      <div class="card">
+        <h2>Telemetry — State Evolution</h2>
+        <canvas id="chartTelemetry" height="180"></canvas>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card">
+        <h2>Protocol Event Log</h2>
+        <div class="log" id="log"></div>
+      </div>
+      <div class="card">
+        <h2>Controls</h2>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:12px;">
+          <button onclick="play()" style="background:var(--accent);color:#fff;border:0;border-radius:8px;padding:10px;font-weight:600;cursor:pointer;">▶ Play Protocol</button>
+          <button onclick="location.reload()" style="background:transparent;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:10px;cursor:pointer;">↻ Reset</button>
+          <div style="color:var(--muted);font-size:11px;line-height:1.5;">5-phase SOP: Seeding (0–10ns) → Field (10–30ns) → Amplification (30–70ns) → Interface (70–90ns) → Observation (90–100ns). Safety: energy &lt; 1 J, auto-shutdown at P &gt; 1.5.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const TELEMETRY = /*__TELEMETRY__*/ [];
+
+const canvas = document.getElementById("simCanvas");
+const ctx = canvas.getContext("2d");
+const chart = document.getElementById("chartTelemetry");
+const cctx = chart.getContext("2d");
+let frame = 0;
+let playing = false;
+let speed = 1;
+
+function phaseOf(t){ if(t<10) return "ENTANGLEMENT SEEDING"; if(t<30) return "GHz FIELD ACTIVATION"; if(t<70) return "COHERENCE AMPLIFICATION"; if(t<90) return "INTERFACE FORMATION"; return "OBSERVATION"; }
+
+function drawStep(idx){
+  const s = TELEMETRY[Math.min(idx, TELEMETRY.length-1)];
+  if(!s) return;
+  document.getElementById("phaseLabel").textContent = "Phase: " + s.phase;
+  document.getElementById("mFidelity").textContent = s.fidelity.toFixed(2);
+  document.getElementById("bFidelity").style.width = (s.fidelity*100)+"%";
+  document.getElementById("mCoherence").textContent = s.coherence.toFixed(2);
+  document.getElementById("bCoherence").style.width = (s.coherence*100)+"%";
+  document.getElementById("mDecoherence").textContent = s.decoherenceRate.toFixed(4);
+  document.getElementById("mPortal").textContent = s.portalMetric.toFixed(3);
+  document.getElementById("hud").innerHTML =
+    "t = "+s.tNs.toFixed(0)+" ns<br>Fidelity: "+s.fidelity.toFixed(2)+
+    "<br>Concurrence: "+s.concurrence.toFixed(2)+"<br>Entropy: "+s.entropy.toFixed(2)+" ebits"+
+    "<br>Field: "+s.fieldMVm.toFixed(2)+" MV/m<br>Dissociated: "+s.dissociatedPct.toFixed(1)+"%";
+
+  // chamber rendering
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const w=canvas.width, h=canvas.height;
+  // field glow
+  const glow = ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,w/2);
+  glow.addColorStop(0, `rgba(45,126,181,${0.08+s.fieldMVm*0.05})`);
+  glow.addColorStop(1, "rgba(0,0,0,0)");
+  ctx.fillStyle = glow; ctx.fillRect(0,0,w,h);
+  // particles (deterministic pseudo-positions from index)
+  for(let i=0;i<400;i++){
+    const px = (i*137.508)%w, py = (i*97.31)%h;
+    const wave = Math.sin(i + s.tNs*0.05 + s.fieldMVm)*0.5;
+    const dissociated = (i/400)*100 < s.dissociatedPct;
+    ctx.beginPath();
+    ctx.arc(px, py+wave*4, dissociated?1.2:2, 0, Math.PI*2);
+    ctx.fillStyle = dissociated ? "rgba(200,90,58,.7)" : "rgba(125,211,252,.65)";
+    ctx.fill();
+  }
+  // portal ring when P > 1
+  if(s.portalMetric>1){
+    ctx.beginPath(); ctx.arc(w/2,h/2, 60+s.portalMetric*20, 0, Math.PI*2);
+    ctx.strokeStyle = "rgba(251,146,60,.8)"; ctx.lineWidth=3; ctx.stroke();
+  }
+  ctx.font="11px monospace"; ctx.fillStyle="rgba(148,163,184,.5)";
+  ctx.fillText("SIMULATION", w-110, h-14);
+
+  // telemetry chart
+  cctx.clearRect(0,0,chart.width,chart.height);
+  const cw=chart.width, ch=chart.height;
+  cctx.font="10px monospace"; cctx.fillStyle="#64748b";
+  cctx.fillText("P (portal) — blue   F (fidelity) — green   C (coherence) — orange", 8, 14);
+  const n=TELEMETRY.length;
+  const series = [
+    { key:"portalMetric", color:"#2d7eb5" },
+    { key:"fidelity", color:"#059669" },
+    { key:"coherence", color:"#c85a3a" },
+  ];
+  series.forEach(sr=>{
+    cctx.strokeStyle=sr.color; cctx.lineWidth=1.6; cctx.beginPath();
+    for(let i=0;i<n;i++){
+      const x = (i/(n-1))*cw;
+      const y = ch-20 - Math.min(1,TELEMETRY[i][sr.key])*(ch-34);
+      i===0 ? cctx.moveTo(x,y) : cctx.lineTo(x,y);
+    }
+    cctx.stroke();
+  });
+  // threshold line
+  cctx.strokeStyle="rgba(220,38,38,.5)"; cctx.setLineDash([4,4]); cctx.beginPath();
+  cctx.moveTo(0, ch-20-(ch-34)); cctx.lineTo(cw, ch-20-(ch-34)); cctx.stroke();
+  cctx.setLineDash([]);
+}
+
+function play(){
+  if(playing) return;
+  playing = true;
+  const log = document.getElementById("log");
+  log.innerHTML = "";
+  const mark = (t,msg,cls) => { const d=document.createElement("div"); d.className=cls||""; d.textContent=`t=${t}ns  ${msg}`; log.appendChild(d); log.scrollTop=log.scrollHeight; };
+  mark(0,"INITIALIZE — Yee grid + dust cloud placed","good");
+  frame = 0;
+  const step = () => {
+    if(frame >= TELEMETRY.length){ playing=false; mark(TELEMETRY[TELEMETRY.length-1].tNs,"RUN COMPLETE — forced decoherence at end","crit"); return; }
+    const s = TELEMETRY[frame];
+    if(frame%5===0){ mark(s.tNs, s.phase, s.portalMetric>1?"crit":(s.phase==="INTERFACE FORMATION"?"warn":"good")); }
+    if(s.portalMetric>1 && frame%10===0) mark(s.tNs, `Portal Metric P=${s.portalMetric.toFixed(2)} > 1.0 (model interface)`, "crit");
+    drawStep(frame);
+    frame+=speed;
+    setTimeout(step, 40);
+  };
+  step();
+}
+
+drawStep(0);
+</script>
+</body>
+</html>

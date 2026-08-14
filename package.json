@@ -1,29 +1,52 @@
 {
-  "name": "invisible-pressure-platform",
-  "version": "0.1.0",
+  "name": "digital-twin-character-customiser",
+  "version": "4.1.0",
+  "description": "Digital Twin Character Customizer (Aether Core) — cinematic 3D character rig, simulation engine, agent matrix evolution, and operations dashboard monorepo",
   "private": true,
-  "description": "Monorepo for the Invisible Pressure / DUP technology ecosystem",
-  "license": "MIT",
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "cores/*",
+    "engines/*",
+    "web-app",
+    "server",
+    "shared",
+    "simulations",
+    "pipelines",
+    "tests"
   ],
   "scripts": {
-    "spec:generate": "python3 scripts/generate_platform_spec.py",
-    "sim:dup": "python3 -m theory_sim --mode dup",
-    "sim:resonance": "python3 -m theory_sim --mode resonance --freq 7.83",
-    "sim:sensor": "python3 -m sensor --mode detect",
-    "test": "python3 -m pytest tests -v",
-    "test:unit": "python3 -m pytest tests/unit -v",
-    "lint": "echo \"lint gates wired in CI (eslint for TS packages, ruff for Python)\"",
-    "build:web": "pnpm --filter @ipp/web build",
-    "deploy:workers": "pnpm --filter @ipp/api deploy"
+    "dev": "npm run dev -w web-app",
+    "build": "npm run build -w web-app",
+    "preview": "npm run preview -w web-app",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "sim:lifestyle": "tsx simulations/lifestyle/run.ts",
+    "sim:agent-matrix": "tsx simulations/agent-matrix/run.ts",
+    "sim:telemetry": "tsx simulations/telemetry/run.ts",
+    "sim:quantum": "tsx simulations/quantum-interface/run.ts",
+    "sim:all": "npm run sim:lifestyle && npm run sim:agent-matrix && npm run sim:telemetry && npm run sim:quantum",
+    "pipeline:telemetry": "tsx pipelines/telemetry-pipeline.ts",
+    "pipeline:manifest": "tsx pipelines/manifest-generator.ts",
+    "pipeline:sync": "tsx pipelines/sync-registry.ts",
+    "hooks:install": "bash hooks/install-hooks.sh"
   },
-  "engines": {
-    "node": ">=20"
-  },
+  "keywords": [
+    "digital-twin",
+    "3d",
+    "ai",
+    "customiser",
+    "simulation",
+    "agent-matrix",
+    "evolution",
+    "react-three-fiber",
+    "zustand"
+  ],
+  "author": "Aether Core",
+  "license": "MIT",
   "devDependencies": {
-    "typescript": "^5.5.0",
-    "pnpm": "^9.0.0"
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vitest": "^2.1.8"
   }
 }

@@ -1,0 +1,86 @@
+{
+  "status": "SIMULATED",
+  "overall": {
+    "windows": 10,
+    "meanCoherence": 0.792,
+    "bestWindow": {
+      "window": 4,
+      "samples": 60,
+      "avgSchumann": 0.6454,
+      "avgCoherence": 0.839,
+      "peakPortal": 0.5415
+    }
+  },
+  "windows": [
+    {
+      "window": 1,
+      "samples": 60,
+      "avgSchumann": 0.6638,
+      "avgCoherence": 0.7437,
+      "peakPortal": 0.4937
+    },
+    {
+      "window": 2,
+      "samples": 60,
+      "avgSchumann": 0.6368,
+      "avgCoherence": 0.7936,
+      "peakPortal": 0.5054
+    },
+    {
+      "window": 3,
+      "samples": 60,
+      "avgSchumann": 0.6573,
+      "avgCoherence": 0.7749,
+      "peakPortal": 0.5093
+    },
+    {
+      "window": 4,
+      "samples": 60,
+      "avgSchumann": 0.6454,
+      "avgCoherence": 0.839,
+      "peakPortal": 0.5415
+    },
+    {
+      "window": 5,
+      "samples": 60,
+      "avgSchumann": 0.6725,
+      "avgCoherence": 0.8103,
+      "peakPortal": 0.5449
+    },
+    {
+      "window": 6,
+      "samples": 60,
+      "avgSchumann": 0.6571,
+      "avgCoherence": 0.7952,
+      "peakPortal": 0.5225
+    },
+    {
+      "window": 7,
+      "samples": 60,
+      "avgSchumann": 0.6305,
+      "avgCoherence": 0.7871,
+      "peakPortal": 0.4963
+    },
+    {
+      "window": 8,
+      "samples": 60,
+      "avgSchumann": 0.6489,
+      "avgCoherence": 0.7931,
+      "peakPortal": 0.5147
+    },
+    {
+      "window": 9,
+      "samples": 60,
+      "avgSchumann": 0.6524,
+      "avgCoherence": 0.8148,
+      "peakPortal": 0.5315
+    },
+    {
+      "window": 10,
+      "samples": 60,
+      "avgSchumann": 0.6579,
+      "avgCoherence": 0.7688,
+      "peakPortal": 0.5058
+    }
+  ]
+}

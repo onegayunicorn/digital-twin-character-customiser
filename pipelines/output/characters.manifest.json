@@ -1,0 +1,210 @@
+{
+  "manifestVersion": "4.1.0",
+  "generatedAt": "2026-08-14T15:26:10.230Z",
+  "characters": [
+    {
+      "id": "Twin_Alpha_01",
+      "name": "Twin_Alpha_01",
+      "gender": "Male",
+      "attributes": {
+        "motherId": 0,
+        "fatherId": 0,
+        "resemblance": 0.85,
+        "skinTone": 0.5,
+        "features": {
+          "brows": {
+            "x": 0,
+            "y": 0
+          },
+          "eyes": {
+            "x": 0,
+            "y": 0
+          },
+          "nose": {
+            "x": 0,
+            "y": 0
+          },
+          "noseProfile": {
+            "x": 0,
+            "y": 0
+          },
+          "noseTip": {
+            "x": 0,
+            "y": 0
+          },
+          "cheekbones": {
+            "x": 0,
+            "y": 0
+          },
+          "cheeks": 0,
+          "lips": 0,
+          "jaw": {
+            "x": 0.9,
+            "y": 0.8
+          },
+          "chinProfile": {
+            "x": 0,
+            "y": 0
+          },
+          "chinShape": {
+            "x": 0,
+            "y": 0
+          },
+          "neckWidth": 0
+        },
+        "appearance": {
+          "hairId": 0,
+          "hairColor": 0,
+          "hairHighlight": 0,
+          "eyebrowsId": 0,
+          "eyebrowsOpacity": 1,
+          "eyeColorId": 0
+        },
+        "lifestyle": {
+          "sleeping": 5,
+          "friends": 4,
+          "sports": 4,
+          "legalWork": 4,
+          "illegalWork": 8
+        }
+      },
+      "created": "2026-08-14"
+    },
+    {
+      "id": "Cyber_Model_V2",
+      "name": "Cyber_Model_V2",
+      "gender": "Female",
+      "attributes": {
+        "motherId": 0,
+        "fatherId": 0,
+        "resemblance": 0.5,
+        "skinTone": 0.4,
+        "features": {
+          "brows": {
+            "x": 0,
+            "y": 0
+          },
+          "eyes": {
+            "x": 0,
+            "y": 0
+          },
+          "nose": {
+            "x": -0.6,
+            "y": 0
+          },
+          "noseProfile": {
+            "x": 0,
+            "y": 0
+          },
+          "noseTip": {
+            "x": 0,
+            "y": 0
+          },
+          "cheekbones": {
+            "x": 0,
+            "y": 0
+          },
+          "cheeks": 0,
+          "lips": 0,
+          "jaw": {
+            "x": 0,
+            "y": 0
+          },
+          "chinProfile": {
+            "x": 0,
+            "y": 0
+          },
+          "chinShape": {
+            "x": 0,
+            "y": 0
+          },
+          "neckWidth": 0
+        },
+        "appearance": {
+          "hairId": 0,
+          "hairColor": 3,
+          "hairHighlight": 0,
+          "eyebrowsId": 0,
+          "eyebrowsOpacity": 1,
+          "eyeColorId": 0
+        },
+        "lifestyle": {
+          "sleeping": 8,
+          "friends": 4,
+          "sports": 4,
+          "legalWork": 8,
+          "illegalWork": 4
+        }
+      },
+      "created": "2026-08-14"
+    },
+    {
+      "id": "Noir_Specter",
+      "name": "Noir_Specter",
+      "gender": "Female",
+      "attributes": {
+        "motherId": 0,
+        "fatherId": 0,
+        "resemblance": 0.3,
+        "skinTone": 0.5,
+        "features": {
+          "brows": {
+            "x": 0,
+            "y": 0
+          },
+          "eyes": {
+            "x": 0,
+            "y": 0
+          },
+          "nose": {
+            "x": 0,
+            "y": 0
+          },
+          "noseProfile": {
+            "x": 0,
+            "y": 0
+          },
+          "noseTip": {
+            "x": 0,
+            "y": 0
+          },
+          "cheekbones": {
+            "x": 0,
+            "y": 0.8
+          },
+          "cheeks": 0,
+          "lips": -0.4,
+          "jaw": {
+            "x": 0,
+            "y": 0
+          },
+          "chinProfile": {
+            "x": 0,
+            "y": 0
+          },
+          "chinShape": {
+            "x": 0,
+            "y": 0
+          },
+          "neckWidth": 0
+        },
+        "appearance": {
+          "hairId": 0,
+          "hairColor": 0,
+          "hairHighlight": 0,
+          "eyebrowsId": 0,
+          "eyebrowsOpacity": 1,
+          "eyeColorId": 0
+        },
+        "lifestyle": {
+          "sleeping": 8,
+          "friends": 8,
+          "sports": 4,
+          "legalWork": 4,
+          "illegalWork": 4
+        }
+      },
+      "created": "2026-08-14"
+    }
+  ]
+}

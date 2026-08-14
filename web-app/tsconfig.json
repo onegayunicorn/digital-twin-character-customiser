@@ -1,0 +1,22 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@dt-core/types": ["../cores/types/src/index.ts"],
+      "@dt-core/state": ["../cores/state/src/index.ts"],
+      "@dt-core/ai-router": ["../cores/ai-router/src/index.ts"],
+      "@dt-core/simulation": ["../cores/simulation/src/index.ts"],
+      "@dt-core/agent-matrix": ["../cores/agent-matrix/src/index.ts"],
+      "@dt-engine/lifestyle": ["../engines/lifestyle/src/index.ts"],
+      "@dt-engine/feature-grid": ["../engines/feature-grid/src/index.ts"],
+      "@dt-engine/gltf-registry": ["../engines/gltf-registry/src/index.ts"],
+      "@dt-engine/mesh-pipeline": ["../engines/mesh-pipeline/src/index.ts"],
+      "@dt-engine/telemetry": ["../engines/telemetry/src/index.ts"],
+      "@dt-engine/evolution": ["../engines/evolution/src/index.ts"]
+    }
+  },
+  "include": ["src", "vite.config.ts"]
+}

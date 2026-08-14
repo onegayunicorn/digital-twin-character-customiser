@@ -1,0 +1,193 @@
+{
+  "title": "Agent Matrix Evolution Simulation",
+  "status": "SIMULATED",
+  "seed": 2026,
+  "populationSize": 24,
+  "generations": 30,
+  "geneCount": 18,
+  "converged": true,
+  "finalGeneration": 16,
+  "best": {
+    "id": "14-4-zcy1vc",
+    "name": "Agent_14_04",
+    "fitness": 0.7482045822895891,
+    "archetype": "Balanced",
+    "lineage": [
+      "13-9-86cheo",
+      "13-9-86cheo"
+    ],
+    "phenotype": {
+      "motherId": 0,
+      "fatherId": 0,
+      "resemblance": 0.8677759253113067,
+      "skinTone": 0.9358868321869522,
+      "features": {
+        "brows": {
+          "x": -0.192944082669389,
+          "y": 0.2097895650578414
+        },
+        "eyes": {
+          "x": -0.9886528547675432,
+          "y": -0.011512450953752307
+        },
+        "nose": {
+          "x": -0.01810856161056229,
+          "y": 0.424108300138464
+        },
+        "noseProfile": {
+          "x": 0,
+          "y": 0
+        },
+        "noseTip": {
+          "x": 0,
+          "y": 0
+        },
+        "cheekbones": {
+          "x": -0.7469314710150957,
+          "y": -0.07949562818286604
+        },
+        "cheeks": 0,
+        "lips": 0,
+        "jaw": {
+          "x": 0.156178994234335,
+          "y": -0.37635837576914366
+        },
+        "chinProfile": {
+          "x": 0.8249883020019992,
+          "y": 0.5361478364366694
+        },
+        "chinShape": {
+          "x": 0,
+          "y": 0
+        },
+        "neckWidth": 0
+      },
+      "appearance": {
+        "hairId": 0,
+        "hairColor": 0,
+        "hairHighlight": 0,
+        "eyebrowsId": 0,
+        "eyebrowsOpacity": 1,
+        "eyeColorId": 0
+      },
+      "lifestyle": {
+        "sleeping": 4.60756376530598,
+        "friends": 4.61721840634458,
+        "sports": 5.0828037151365,
+        "legalWork": 4.60756376530598,
+        "illegalWork": 5.08485034790696
+      }
+    },
+    "statPower": 4.625231797676185,
+    "modifiers": {
+      "stamina": 0.701157144615569,
+      "strength": 0.6812358615448683,
+      "stealth": 0.617803146744185,
+      "shooting": 0.6813254017285758,
+      "driving": 0.6168303503712774,
+      "lungCapacity": 0.6574482811437116,
+      "flying": 0.6694316115279976
+    }
+  },
+  "trajectory": [
+    {
+      "generation": 1,
+      "bestFitness": 0.7236707227312196,
+      "averageFitness": 0.6630507095061611,
+      "diversity": 0.2540223505481068
+    },
+    {
+      "generation": 2,
+      "bestFitness": 0.73038316913146,
+      "averageFitness": 0.6933789759305881,
+      "diversity": 0.2055220608500729
+    },
+    {
+      "generation": 3,
+      "bestFitness": 0.74639775026261,
+      "averageFitness": 0.7178235060272643,
+      "diversity": 0.15396291698612974
+    },
+    {
+      "generation": 4,
+      "bestFitness": 0.74639775026261,
+      "averageFitness": 0.7299735299023683,
+      "diversity": 0.10354570261103596
+    },
+    {
+      "generation": 5,
+      "bestFitness": 0.7469030893200952,
+      "averageFitness": 0.7368127374892088,
+      "diversity": 0.0745124157429754
+    },
+    {
+      "generation": 6,
+      "bestFitness": 0.7469030893200952,
+      "averageFitness": 0.7423627919956499,
+      "diversity": 0.04672446051057888
+    },
+    {
+      "generation": 7,
+      "bestFitness": 0.7471849311180044,
+      "averageFitness": 0.7452897737784158,
+      "diversity": 0.029896412915156354
+    },
+    {
+      "generation": 8,
+      "bestFitness": 0.7471849311180044,
+      "averageFitness": 0.7442020475764987,
+      "diversity": 0.03221408393432861
+    },
+    {
+      "generation": 9,
+      "bestFitness": 0.7474054534176608,
+      "averageFitness": 0.7446139866436106,
+      "diversity": 0.03335582595763376
+    },
+    {
+      "generation": 10,
+      "bestFitness": 0.7478652264035709,
+      "averageFitness": 0.7465437753293002,
+      "diversity": 0.03950309362417425
+    },
+    {
+      "generation": 11,
+      "bestFitness": 0.7478652264035709,
+      "averageFitness": 0.7439155367055442,
+      "diversity": 0.036891392266735976
+    },
+    {
+      "generation": 12,
+      "bestFitness": 0.747987733013238,
+      "averageFitness": 0.7461896620977431,
+      "diversity": 0.03402924104871378
+    },
+    {
+      "generation": 13,
+      "bestFitness": 0.7482038662206001,
+      "averageFitness": 0.7466622991198122,
+      "diversity": 0.03511806759971192
+    },
+    {
+      "generation": 14,
+      "bestFitness": 0.7482045822895891,
+      "averageFitness": 0.7461656445474226,
+      "diversity": 0.03825125836284488
+    },
+    {
+      "generation": 15,
+      "bestFitness": 0.7482045822895891,
+      "averageFitness": 0.7450032700525645,
+      "diversity": 0.03207747642116455
+    },
+    {
+      "generation": 16,
+      "bestFitness": 0.7482045822895891,
+      "averageFitness": 0.7470017479810189,
+      "diversity": 0.02837251299325768
+    }
+  ],
+  "archetypeDistribution": {
+    "Balanced": 24
+  }
+}

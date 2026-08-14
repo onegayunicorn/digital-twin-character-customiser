@@ -1,0 +1,52 @@
+# Aether Core — full-stack run environment
+#   web   (nginx static SPA)  → :8080
+#   api   (Express + tRPC)    → :3001
+#   db    (MySQL 8)           → :3306
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: environments/Dockerfile
+      target: web
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: ..
+      dockerfile: environments/Dockerfile
+      target: api
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      DATABASE_URL: mysql://aether:aether_secret@db:3306/aether_core
+      JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
+      CORS_ORIGIN: "*"
+    ports:
+      - "3001:3001"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: root_secret
+      MYSQL_DATABASE: aether_core
+      MYSQL_USER: aether
+      MYSQL_PASSWORD: aether_secret
+    ports:
+      - "3306:3306"
+    volumes:
+      - aether_mysql:/var/lib/mysql
+      - ../drizzle/migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot_secret"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  aether_mysql:
