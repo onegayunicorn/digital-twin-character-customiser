@@ -19,6 +19,10 @@
     "deploy": "pnpm build:verified && pnpm deploy:raw",
     "verify:workers": "node scripts/cloudflare/verify-workers.mjs",
     "verify:workers:strict": "node scripts/cloudflare/verify-workers.mjs --strict",
+    "cloudflare:build": "pnpm build:verified",
+    "cloudflare:preflight": "pnpm preflight",
+    "cloudflare:dry-run": "pnpm exec wrangler deploy --dry-run",
+    "cloudflare:activate": "node scripts/cloudflare/activate.mjs",
     "audit:json": "pnpm audit --json",
     "ci": "pnpm install --frozen-lockfile && pnpm check && pnpm test && pnpm test:webhooks && pnpm build:verified"
   },

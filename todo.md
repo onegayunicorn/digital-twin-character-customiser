@@ -37,3 +37,10 @@ Triggers and webhooks remain local or explicitly gated. No live trading, wallet 
 - [x] Align the build output directory with `assets.directory` and make the deploy command run after the build.
 - [x] Run build, preflight, Wrangler dry run, and repository hygiene checks.
 - [ ] Push the correction and provide the exact Cloudflare settings.
+
+## Webhook and Activation Release
+
+- [x] Create webhook, pipeline, module, and gated activation boundaries.
+- [x] Correct Cloudflare sequencing so the build creates `web-app/dist/public` before Wrangler runs.
+- [x] Run typecheck, tests, webhook tests, Python tests, verified build, preflight, Wrangler dry run, and activation-gate checks.
+- [ ] Push the validated activation release and provide dashboard settings.
