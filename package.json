@@ -11,8 +11,12 @@
   "scripts": {
     "build": "pnpm --dir web-app build",
     "check": "pnpm --dir web-app check",
-    "deploy": "npx --yes wrangler deploy",
-    "test": "pnpm --dir web-app exec vitest run --passWithNoTests"
+    "test": "pnpm --dir web-app exec vitest run --passWithNoTests",
+    "preflight": "node scripts/identity-forge-v2/preflight.mjs",
+    "build:verified": "node scripts/identity-forge-v2/build.mjs",
+    "deploy:raw": "node scripts/identity-forge-v2/deploy.mjs",
+    "deploy": "pnpm build:verified && pnpm deploy:raw",
+    "ci": "pnpm install --frozen-lockfile && pnpm check && pnpm test && pnpm build:verified"
   },
   "keywords": [
     "digital-twin",
@@ -22,5 +26,8 @@
   ],
   "author": "",
   "license": "MIT",
-  "packageManager": "pnpm@10.11.1"
+  "packageManager": "pnpm@10.11.1",
+  "devDependencies": {
+    "wrangler": "4.123.0"
+  }
 }
