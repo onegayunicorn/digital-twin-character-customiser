@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import type { FaceVector } from "@/components/AvatarViewport";
 import { FeatureGrid } from "@/components/FeatureGrid";
 import { buildRunRecord, calculateTelemetry, downloadJson, downloadPdf, type RunRecord, type ScenarioSpec } from "@/lib/simulation-record";
+import { UrbanArchivePanel } from "@/components/UrbanArchivePanel";
 
 const AvatarViewport = lazy(() => import("@/components/AvatarViewport").then((module) => ({ default: module.AvatarViewport })));
 const ParticleChamber = lazy(() => import("@/components/ParticleChamber").then((module) => ({ default: module.ParticleChamber })));
@@ -137,6 +138,8 @@ export default function Home() {
           <div className="feature-controls"><div className="section-kicker"><Database /><span>FEATURE VECTORS</span></div><p>Move a crosshair to set each normalized vector.</p><div className="feature-grid-list">{Object.entries(vectors).map(([key, value]) => <FeatureGrid key={key} label={key} value={value} onChange={(next) => updateVector(key, next)} />)}</div></div>
         </div>
       </section>
+
+      <UrbanArchivePanel />
 
       <section id="method" className="method-section">
         <div className="method-heading"><span className="eyebrow">MODEL METHOD</span><h2>Every visual output carries an assumption.</h2></div>

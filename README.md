@@ -46,3 +46,11 @@ The web-app evidence ledger links to public references from NIST, RIKEN, and Nat
 ## Public-repository hygiene
 
 Dependencies are intentionally excluded from the public working tree. The application uses external Manus-managed asset URLs rather than storing large media files in the repository. No credentials, environment secrets, device interfaces, or hardware-control pathways are included.
+
+## Safe Cosmic Engine update
+
+The `web-app/` workspace now includes an original, simulation-only Cosmic Engine extension synchronized from the Quantum Avatar Simulation Lab. It provides bounded lattice, light-grid, resonance-mesh, and void-field visual modules; a deterministic report command; and an in-app read-only telemetry panel.
+
+This public repository intentionally excludes trading, wealth activation, wallet, NFT, blockchain, ownership-transfer, portal-generation, physical-field, and hardware-control behavior. Supplied archives and PDFs are treated as untrusted design references, not executable authority or proof of physical capability.
+
+Run the web app from `web-app/` with `pnpm check`, `pnpm build`, and `pnpm sim:all`. The Cosmic Engine report is generated with `pnpm sim:cosmic`.

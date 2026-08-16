@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "type": "module",
   "license": "MIT",
+  "private": true,
+  "workspaces": ["cores/*", "engines/*", "game/*", "devices/*", "simulations/*"],
   "scripts": {
     "dev": "vite --host",
     "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "start": "NODE_ENV=production node dist/index.js",
     "preview": "vite preview --host",
     "check": "tsc --noEmit",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "sim:coherence-node": "tsx simulations/coherence-node/run.ts",
+    "sim:yee-grid": "tsx simulations/coherence-node/yee-grid-report.ts",
+    "sim:cosmic": "tsx simulations/cosmic/run.ts",
+    "sim:all": "pnpm sim:coherence-node && pnpm sim:yee-grid && pnpm sim:cosmic",
+    "sim:bci": "tsx simulations/coherence-node/run.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

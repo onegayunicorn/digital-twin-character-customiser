@@ -1,7 +1,7 @@
 # Scientific Scope and Safety Boundary
 
-**Author:** Manus AI
-**Project:** Quantum Avatar Simulation Lab
+**Author:** Manus AI  
+**Project:** Quantum Avatar Simulation Lab  
 **Status:** Educational visual simulation; no hardware connectivity; no experimental operating instructions
 
 > **Scope statement.** This project is a browser-based visualization of selected, simplified mathematical ideas from quantum optics, particle dynamics, and transformation optics. It does **not** model, predict, enable, or claim the physical creation of a portal, spacetime alteration, molecular disassembly/reassembly, or any real-world device operation.

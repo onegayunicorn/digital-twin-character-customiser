@@ -1,0 +1,6 @@
+packages:
+  - "cores/*"
+  - "engines/*"
+  - "game/*"
+  - "devices/*"
+  - "simulations/*"

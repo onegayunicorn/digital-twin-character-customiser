@@ -1,6 +1,6 @@
 # Simulation Protocol and Scenario Catalogue
 
-**Author:** Manus AI
+**Author:** Manus AI  
 **Purpose:** Implementation specification for a browser-only visual model
 
 ## 1. Simulation state
@@ -69,3 +69,18 @@ The validator also compared the transformation-optics track at two environment w
 | Increasing the environment weight reduces the analogy index | Pass |
 | Type checking (`pnpm check`) | Pass |
 | Production compilation (`pnpm build`) | Pass |
+
+
+## 8. PDF integration: bounded Yee-grid-lite track
+
+The new reference’s micro-cell vocabulary is implemented as a normalized visual track rather than a physical field solver. `YeeGridLite` uses an `8 × 8 × 4` flattened array with deterministic seed `783`, 24 fixed steps, and a software-only normalized energy cap of `0.88`.
+
+| Acceptance check | Result |
+| --- | --- |
+| Fixed-seed repeatability | Pass; the report is deterministic for seed `783`. |
+| Channel normalization | Pass; fidelity, coherence, intensity, decoherence, amplitude, velocity, and phase remain in `[0, 1]`. |
+| Safety interlock | Pass; aggregate normalized energy remained `0.23274`, below the cap, with `0` resets. |
+| Hardware boundary | Pass; no device, frequency, field-amplitude, stimulation, or actuation path exists. |
+| Report provenance | Pass; the JSON output is labelled `SIMULATED` and includes an explicit boundary statement. |
+
+The implementation does not claim to solve Maxwell’s equations, model molecules or dust, create portals, or reproduce a physical Yee/FDTD solver. It is an educational visualization of normalized state channels.

@@ -64,3 +64,74 @@ This project deliberately contains no calibrated frequency, field-amplitude, ene
 After starting or completing a visual run, the **Run Archive** controls expose two local downloads. **JSON** saves the full machine-readable record, including the entire normalized telemetry series, while **PDF** saves a human-readable report with the selected track, configuration, peak and final values, sampled telemetry, and validation status. A no-run state keeps both buttons disabled so an empty record cannot be mistaken for a result.
 
 The export contract is documented in [`docs/EXPORT_SCHEMA.md`](docs/EXPORT_SCHEMA.md). The default optical-metric run produces a peak analogy index of **0.512**, a final cool-down index of **0.158**, and a final noise state of **0.278**. These are dimensionless software outputs, not physical observations.
+
+
+## Neon Borough Archive extension
+
+This repository now includes an original urban digital-twin game slice layered onto the simulation lab. The new `game/` modules define districts, missions, avatar profiles, and stat shifts. The `engines/coherence-node/` and `devices/bci-simulator/` modules provide a consent-gated, deterministic mock signal path for visual feedback. The browser exposes a mission board, district index, and Coherence Node preview under **Build a twin. Read the borough.**
+
+The supplied `update.zip` contained an Epic Games Store APK extraction rather than source code. The binary, native libraries, fonts, images, and proprietary resources are intentionally excluded from this repository. High-level architectural ideas from the supplied documentation were rewritten as original modules. The game is not a Saints Row or Epic Games Store build and does not ship their names, characters, logos, code, or assets.
+
+### BCI boundary
+
+The BCI layer is a simulation-only, read-only visualization. It has no stimulation path, no diagnostic or treatment logic, no arbitrary hardware commands, and no vehicle, weapon, access-control, or financial-control integration. See [`docs/BCI_SAFETY.md`](docs/BCI_SAFETY.md) and [`docs/SUPPLIED_MATERIALS_REVIEW.md`](docs/SUPPLIED_MATERIALS_REVIEW.md).
+
+### Run the deterministic node simulation
+
+```bash
+pnpm sim:coherence-node
+```
+
+The command writes `simulations/coherence-node/output/coherence-node-report.json` with 64 synthetic samples, average and peak coherence, average entropy, average focus, the mock-device status, and the explicit safety boundary. Outputs are synthetic and must not be interpreted as recordings from a person.
+
+
+## New PDF integration: Yee-grid-lite telemetry
+
+The latest supplied reference is now represented by a bounded `engines/telemetry/src/yee-grid-lite.ts` module. It uses a flattened structure-of-arrays layout and dimensionless micro-cell channels—fidelity, coherence, intensity, decoherence, amplitude, velocity, and phase—to create a deterministic visual telemetry record. A software-only energy cap resets the normalized state if the aggregate visual energy exceeds its configured limit.
+
+Run both reproducible reports with:
+
+```bash
+pnpm sim:all
+```
+
+The new report is written to `simulations/coherence-node/output/yee-grid-lite-report.json`. The default run uses an `8 × 8 × 4` grid, 24 steps, seed `783`, and energy cap `0.88`; the validated run completes with peak normalized energy `0.23274` and zero software-interlock resets. These values are software outputs and are not measurements of fields, molecules, dust, portals, brains, or hardware.
+
+The PDF’s proposed portal-field, GHz/molecular, dust, Maxwell/FDTD, and physical EEG-hardware claims remain excluded from operational behavior. The UI exposes a **Yee-grid-lite field record** and a **Run normalized grid** action only as an educational visual model. See [`docs/NEW_PDF_REVIEW.md`](docs/NEW_PDF_REVIEW.md) for the complete compatibility and provenance mapping.
+
+
+## Documentation index
+
+The complete project documentation is organized as follows:
+
+| Document | Purpose |
+| --- | --- |
+| [`docs/TECHNICAL_OVERVIEW.md`](docs/TECHNICAL_OVERVIEW.md) | Repository locations, runtime architecture, data flow, modules, validation, and provenance. |
+| [`docs/PRODUCT_PITCH.md`](docs/PRODUCT_PITCH.md) | Product position, audiences, differentiation, demonstration script, and expansion path. |
+| [`docs/OPERATIONS_MANUAL.md`](docs/OPERATIONS_MANUAL.md) | Setup, daily operation, run archives, deterministic reports, troubleshooting, safety, and release procedures. |
+| [`docs/EXPORT_SCHEMA.md`](docs/EXPORT_SCHEMA.md) | JSON/PDF run-record contract and telemetry fields. |
+| [`docs/SIMULATION_PROTOCOL.md`](docs/SIMULATION_PROTOCOL.md) | Five-stage visual sequence, scenario catalogue, acceptance tests, and Yee-grid-lite validation. |
+| [`docs/BCI_SAFETY.md`](docs/BCI_SAFETY.md) | Consent, mock-device behavior, prohibited operations, and future connector requirements. |
+| [`docs/NEW_PDF_REVIEW.md`](docs/NEW_PDF_REVIEW.md) | Compatibility mapping for the latest GTA/simulation/Coherence Node/Yee-grid PDF. |
+| [`docs/SUPPLIED_MATERIALS_REVIEW.md`](docs/SUPPLIED_MATERIALS_REVIEW.md) | Archive/PDF provenance, reuse decisions, and exclusions. |
+
+
+## Cosmic Engine extension
+
+The project now includes an original `engines/cosmic/src` workspace with four bounded visual systems: `lattice.ts`, `light-grid.ts`, `resonance-mesh.ts`, and `void-field.ts`, composed by `cosmic-engine.ts`. The in-app **Cosmic Engine / normalized systems** card is available in the urban archive.
+
+Run its deterministic report with:
+
+```bash
+pnpm sim:cosmic
+```
+
+Run all reports with:
+
+```bash
+pnpm sim:all
+```
+
+The Cosmic Engine output is written to `simulations/cosmic/output/cosmic-engine-report.json` and is labelled `SIMULATED`. The supplied archive and PDFs were used as design references only. Their trading, wealth, wallet, NFT, blockchain, ownership, hyperfusion, portal, and physical-engine claims are not implemented.
+
+See [`docs/COSMIC_ENGINE_REVIEW.md`](docs/COSMIC_ENGINE_REVIEW.md) for the source inventory, compatibility map, and exclusions.
