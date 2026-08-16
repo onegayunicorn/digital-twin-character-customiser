@@ -30,3 +30,10 @@ Triggers and webhooks remain local or explicitly gated. No live trading, wallet 
 - [x] Add the Oneness Architecture and dependency-security runbooks.
 - [x] Run typecheck, tests, webhook tests, build, Python tests, artifact preflight, Wrangler dry run, and worker URL checks.
 - [x] Commit and push this multi-worker content release.
+
+## Cloudflare Asset Directory Repair
+
+- [x] Inspect the active Wrangler manifest, build script, and Cloudflare dashboard root/build settings.
+- [x] Align the build output directory with `assets.directory` and make the deploy command run after the build.
+- [x] Run build, preflight, Wrangler dry run, and repository hygiene checks.
+- [ ] Push the correction and provide the exact Cloudflare settings.
