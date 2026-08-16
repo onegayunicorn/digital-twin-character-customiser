@@ -21,3 +21,12 @@
 ## Safety boundary
 
 Triggers and webhooks remain local or explicitly gated. No live trading, wallet transfers, NFT minting, or financial automation is enabled.
+
+## Multi-Worker Content Release
+
+- [x] Preserve both supplied content files under `docs/source/`.
+- [x] Create the three standalone Wrangler configuration templates under `infra/cloudflare/workers/`.
+- [x] Create the read-only multi-worker HTTP verification script.
+- [x] Add the Oneness Architecture and dependency-security runbooks.
+- [x] Run typecheck, tests, webhook tests, build, Python tests, artifact preflight, Wrangler dry run, and worker URL checks.
+- [ ] Commit and push this multi-worker content release.

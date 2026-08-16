@@ -17,6 +17,9 @@
     "build:verified": "node scripts/identity-forge-v2/build.mjs",
     "deploy:raw": "node scripts/identity-forge-v2/deploy.mjs",
     "deploy": "pnpm build:verified && pnpm deploy:raw",
+    "verify:workers": "node scripts/cloudflare/verify-workers.mjs",
+    "verify:workers:strict": "node scripts/cloudflare/verify-workers.mjs --strict",
+    "audit:json": "pnpm audit --json",
     "ci": "pnpm install --frozen-lockfile && pnpm check && pnpm test && pnpm test:webhooks && pnpm build:verified"
   },
   "keywords": [
