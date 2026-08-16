@@ -12,11 +12,12 @@
     "build": "pnpm --dir web-app build",
     "check": "pnpm --dir web-app check",
     "test": "pnpm --dir web-app exec vitest run --passWithNoTests",
+    "test:webhooks": "node --test integrations/webhooks/handler.test.mjs",
     "preflight": "node scripts/identity-forge-v2/preflight.mjs",
     "build:verified": "node scripts/identity-forge-v2/build.mjs",
     "deploy:raw": "node scripts/identity-forge-v2/deploy.mjs",
     "deploy": "pnpm build:verified && pnpm deploy:raw",
-    "ci": "pnpm install --frozen-lockfile && pnpm check && pnpm test && pnpm build:verified"
+    "ci": "pnpm install --frozen-lockfile && pnpm check && pnpm test && pnpm test:webhooks && pnpm build:verified"
   },
   "keywords": [
     "digital-twin",
