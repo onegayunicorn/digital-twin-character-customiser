@@ -43,4 +43,4 @@ Triggers and webhooks remain local or explicitly gated. No live trading, wallet 
 - [x] Create webhook, pipeline, module, and gated activation boundaries.
 - [x] Correct Cloudflare sequencing so the build creates `web-app/dist/public` before Wrangler runs.
 - [x] Run typecheck, tests, webhook tests, Python tests, verified build, preflight, Wrangler dry run, and activation-gate checks.
-- [ ] Push the validated activation release and provide dashboard settings.
+- [x] Push the validated activation release and provide dashboard settings.
