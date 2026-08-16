@@ -29,4 +29,4 @@ Triggers and webhooks remain local or explicitly gated. No live trading, wallet 
 - [x] Create the read-only multi-worker HTTP verification script.
 - [x] Add the Oneness Architecture and dependency-security runbooks.
 - [x] Run typecheck, tests, webhook tests, build, Python tests, artifact preflight, Wrangler dry run, and worker URL checks.
-- [ ] Commit and push this multi-worker content release.
+- [x] Commit and push this multi-worker content release.
